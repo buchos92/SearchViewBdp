@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bancodelpacifico.searchviewbdp.R
 import com.bancodelpacifico.searchviewbdp.SearchViewBdp
+import com.bancodelpacifico.searchviewbdp.interfaces.ListSearchableAbs
 import kotlinx.android.synthetic.main.search_content_list_item_category.view.title
 import kotlinx.android.synthetic.main.search_content_list_item_item.view.*
 
@@ -33,7 +34,7 @@ class SearchListDefault : Fragment() {
         return rootView
     }
 
-    private fun setRecyclerViewOfList(items: ArrayList<out SearchViewBdp.ListSearchableAbs >){
+    private fun setRecyclerViewOfList(items: ArrayList<out ListSearchableAbs>){
         linearLayoutManager = LinearLayoutManager(requireContext())
         recyclerView.layoutManager = linearLayoutManager
         adpater =
@@ -42,7 +43,7 @@ class SearchListDefault : Fragment() {
     }
 }
 
-class RecyclerAdpater( var items : ArrayList<out SearchViewBdp.ListSearchableAbs>) :
+class RecyclerAdpater( var items : ArrayList<out ListSearchableAbs>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val CATEGORY = 0
@@ -60,7 +61,7 @@ class RecyclerAdpater( var items : ArrayList<out SearchViewBdp.ListSearchableAbs
             (holder as ListHolderItems).bindItems(item,theLastItemIsCategory(items, position))
     }
 
-    private fun theLastItemIsCategory(items: ArrayList<out SearchViewBdp.ListSearchableAbs>, position: Int):Boolean{
+    private fun theLastItemIsCategory(items: ArrayList<out ListSearchableAbs>, position: Int):Boolean{
         if(items.isNotEmpty() && position > (items.size - 1)){
             return items[position - 1].type == CATEGORY
         }
@@ -92,12 +93,12 @@ class RecyclerAdpater( var items : ArrayList<out SearchViewBdp.ListSearchableAbs
 
     class ListHolderCategory(v:View): RecyclerView.ViewHolder(v),View.OnClickListener {
         private var view:View = v
-        private var items: SearchViewBdp.ListSearchableAbs? = null
+        private var items: ListSearchableAbs? = null
 
         init {
             v.setOnClickListener(this)
         }
-        fun bindItems(item : SearchViewBdp.ListSearchableAbs?){
+        fun bindItems(item : ListSearchableAbs?){
             view.title.text = item?.tittle
         }
         override fun onClick(p0: View?) {
@@ -110,12 +111,12 @@ class RecyclerAdpater( var items : ArrayList<out SearchViewBdp.ListSearchableAbs
 
     class ListHolderItems(v:View): RecyclerView.ViewHolder(v),View.OnClickListener {
         private var view:View = v
-        private var items: SearchViewBdp.ListSearchableAbs? = null
+        private var items: ListSearchableAbs? = null
 
         init {
             v.setOnClickListener(this)
         }
-        fun bindItems(item : SearchViewBdp.ListSearchableAbs?, nItems:Boolean){
+        fun bindItems(item : ListSearchableAbs?, nItems:Boolean){
             view.title.text = item?.tittle
             view.description.text = item?.description
             view.additional.text = item?.tittle

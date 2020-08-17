@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bancodelpacifico.searchviewbdp.SearchViewBdp
 import com.bancodelpacifico.searchviewbdp.SearchViewBdp.Companion.CATEGORY
 import com.bancodelpacifico.searchviewbdp.SearchViewBdp.Companion.ITEM
+import com.bancodelpacifico.searchviewbdp.interfaces.SearchBoxListener
+import com.bancodelpacifico.searchviewbdp.interfaces.SearchListener
 
 
 class MainActivity : AppCompatActivity() {
@@ -34,12 +36,13 @@ class MainActivity : AppCompatActivity() {
         searchViewLayout.setExpandedHint("Buscar...")
         searchViewLayout.setListToSearch(listSearchable)
 
-        searchViewLayout.setSearchListener(object:SearchViewBdp.SearchListener{
+        searchViewLayout.setSearchListener(object:
+            SearchListener {
             override fun onFinished(searchKeyword: String?) {
 
             }
         })
-        searchViewLayout.setSearchBoxListener(object : SearchViewBdp.SearchBoxListener{
+        searchViewLayout.setSearchBoxListener(object : SearchBoxListener {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
             }

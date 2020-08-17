@@ -29,6 +29,10 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.bancodelpacifico.searchviewbdp.fragments.SearchListDefault
+import com.bancodelpacifico.searchviewbdp.interfaces.ListSearchableAbs
+import com.bancodelpacifico.searchviewbdp.interfaces.OnToggleAnimationListener
+import com.bancodelpacifico.searchviewbdp.interfaces.SearchBoxListener
+import com.bancodelpacifico.searchviewbdp.interfaces.SearchListener
 
 
 class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(context,attributeSet) {
@@ -350,9 +354,6 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
             mSearchEditText.hint = searchViewHint
         }
     }
-    interface SearchListener {
-        fun onFinished(searchKeyword: String?)
-    }
 
     fun handleToolbarAnimation(toolbar: Toolbar?) {
         mToolbar = toolbar
@@ -365,44 +366,7 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
         mSearchBoxListener = listener
     }
 
-    fun setListToSearch(listSearchable:ArrayList<out ListSearchableAbs >){
+    fun setListToSearch(listSearchable:ArrayList<out ListSearchableAbs>){
         this.listSearchable = listSearchable
-    }
-
-    /***
-     * Interface for listening to search edit text.
-     */
-    interface SearchBoxListener {
-        fun beforeTextChanged(
-            s: CharSequence?,
-            start: Int,
-            count: Int,
-            after: Int
-        )
-
-        fun onTextChanged(
-            s: CharSequence?,
-            start: Int,
-            before: Int,
-            count: Int
-        )
-
-        fun afterTextChanged(s: Editable?)
-    }
-
-    /***
-     * Interface for listening to animation start and finish.
-     * expanding and expanded tell the current state of animation.
-     */
-    interface OnToggleAnimationListener {
-        fun onStart(expanding: Boolean)
-        fun onFinish(expanded: Boolean)
-    }
-
-    abstract class ListSearchableAbs : Parcelable{
-        open lateinit var tittle      :String
-        open var description : String? = null
-        open var additional :String? = null
-        open var type :Int = 0
     }
 }
