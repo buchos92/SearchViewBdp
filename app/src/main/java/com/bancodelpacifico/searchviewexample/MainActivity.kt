@@ -24,11 +24,12 @@ class MainActivity : AppCompatActivity() {
             Items("Test One","Description","",ITEM),
             Items("Test One","Description","",ITEM),
             Items("Test One","Description","",ITEM)
-            )
+        )
 
         // set Up searchView bdp
         val searchViewLayout: SearchViewBdp = findViewById(R.id.search_view_container)
-        searchViewLayout.setExpandedContentSupportFragment(this, SearchListDefault())
+        searchViewLayout.setExpandedContentSupportFragment(this)
+
         searchViewLayout.setCollapsedHint("Welcome to Bdp")
         searchViewLayout.setExpandedHint("Buscar...")
         searchViewLayout.setListToSearch(listSearchable)

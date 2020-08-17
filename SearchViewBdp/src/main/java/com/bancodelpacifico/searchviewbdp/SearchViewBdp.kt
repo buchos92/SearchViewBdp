@@ -28,6 +28,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.bancodelpacifico.searchviewbdp.fragments.SearchListDefault
 
 
 class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(context,attributeSet) {
@@ -65,7 +66,7 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
     private val mFragmentManager: FragmentManager? = null
     private val mExpandedContentFragment: Fragment? = null
     private var mSupportFragmentManager: FragmentManager? = null
-    private var mExpandedContentSupportFragment: Fragment? = null
+    private var mExpandedContentSupportFragment: Fragment? = SearchListDefault()
 
     companion object{
         val CATEGORY:Int = 0
@@ -250,10 +251,10 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
      */
     fun setExpandedContentSupportFragment(
         activity: FragmentActivity,
-        contentSupportFragment: Fragment
+        contentSupportFragment: Fragment? = null
     ) {
-        mExpandedContentSupportFragment = contentSupportFragment;
-        mSupportFragmentManager = activity.supportFragmentManager;
+        mExpandedContentSupportFragment = contentSupportFragment ?: mExpandedContentSupportFragment
+        mSupportFragmentManager = activity.supportFragmentManager
         mExpandedHeight = Utils.getSizeOfScreen(activity)!!.y
     }
 

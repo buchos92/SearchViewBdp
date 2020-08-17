@@ -1,4 +1,4 @@
-package com.bancodelpacifico.searchviewexample
+package com.bancodelpacifico.searchviewbdp.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bancodelpacifico.searchviewbdp.R
 import com.bancodelpacifico.searchviewbdp.SearchViewBdp
 import kotlinx.android.synthetic.main.search_content_list_item_category.view.title
 import kotlinx.android.synthetic.main.search_content_list_item_item.view.*
@@ -35,7 +36,8 @@ class SearchListDefault : Fragment() {
     private fun setRecyclerViewOfList(items: ArrayList<out SearchViewBdp.ListSearchableAbs >){
         linearLayoutManager = LinearLayoutManager(requireContext())
         recyclerView.layoutManager = linearLayoutManager
-        adpater = RecyclerAdpater(items)
+        adpater =
+            RecyclerAdpater(items)
         recyclerView.adapter = adpater
     }
 }
@@ -77,10 +79,14 @@ class RecyclerAdpater( var items : ArrayList<out SearchViewBdp.ListSearchableAbs
         val view: View
         return if (viewType === CATEGORY) { // for call layout
             view = parent.inflate(R.layout.search_content_list_item_category, false)
-            ListHolderCategory(view)
+            ListHolderCategory(
+                view
+            )
         } else { // for email layout
             view = parent.inflate(R.layout.search_content_list_item_item, false)
-            ListHolderItems(view)
+            ListHolderItems(
+                view
+            )
         }
     }
 
