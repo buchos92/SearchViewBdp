@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextViewOverLine2" parent="Theme.AppCompat">
+        <item name="android:fontFamily">@font/helveticanowtextregular</item>
+        <item name="android:gravity">start</item>
+        <item name="android:lineSpacingExtra">2sp</item>
+        <item name="android:textColor">@color/COLOR_SUCCESS_DARK</item>
+        <item name="android:textSize">@dimen/OVERLINE2</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+</resources>

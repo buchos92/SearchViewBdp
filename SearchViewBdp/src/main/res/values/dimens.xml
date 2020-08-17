@@ -36,4 +36,18 @@
     <!-- Approx Size of the layout. This is not used anywhere in layouts
             but can be used to give margin on the main activity. -->
     <dimen name="search_view_layout_approx_height">120dp</dimen>
+
+    <dimen name="OVERLINE2" category="general">11sp</dimen>
+    <dimen name="BODY1" category="general">17sp</dimen>
+    <dimen name="CAPTION1" category="general">13sp</dimen>
+
+    <dimen name="XXS" category="general">2dp</dimen>
+    <dimen name="XS" category="general">4dp</dimen>
+    <dimen name="S" category="general">8dp</dimen>
+    <dimen name="M" category="general">16dp</dimen>
+    <dimen name="L" category="general">24dp</dimen>
+    <dimen name="XL" category="general">32dp</dimen>
+    <dimen name="XXL" category="general">64dp</dimen>
+    <dimen name="BODY2" category="general">15sp</dimen>
+
 </resources>

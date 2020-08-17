@@ -66,6 +66,12 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
     private val mExpandedContentFragment: Fragment? = null
     private var mSupportFragmentManager: FragmentManager? = null
     private var mExpandedContentSupportFragment: Fragment? = null
+
+    companion object{
+        val CATEGORY:Int = 0
+        val ITEM:Int = 1
+    }
+
     /* constructor(context: Context,attrs: AttributeSet?) : super(context,attrs) {
          //ANIMATION_DURATION = context.getResources().getInteger(R.integer.animation_duration);
      }*/
@@ -164,7 +170,7 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
             Utils.hideInputMethod(v)
         }
 
-        mCollapsedDrawable = ColorDrawable(ContextCompat.getColor(context, R.color.transparent))
+        mCollapsedDrawable = ColorDrawable(ContextCompat.getColor(context, android.R.color.transparent))
         mExpandedDrawable = ColorDrawable(ContextCompat.getColor(context, R.color.default_color_expanded))
         mBackgroundTransition = TransitionDrawable(
             arrayOf(
@@ -394,11 +400,8 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
 
     abstract class ListSearchableAbs : Parcelable{
         open lateinit var tittle      :String
-        open lateinit var description :String
-        open lateinit var type        :TYPEITEM
-    }
-    enum class TYPEITEM{
-        ITEM,
-        CATEGORY
+        open var description : String? = null
+        open var additional :String? = null
+        open var type :Int = 0
     }
 }

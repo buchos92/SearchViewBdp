@@ -7,4 +7,20 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <style name="TextNumeroCuenta" parent="Theme.AppCompat">
+        <item name="android:fontFamily">@font/helveticanowtextregular</item>
+        <item name="android:gravity">left</item>
+        <item name="android:lineSpacingExtra">2sp</item>
+        <item name="android:textColor">@color/TEXT_COLOR_PRIMARY_VARIANT</item>
+        <item name="android:textSize">@dimen/CAPTION1</item>
+    </style>
+
+    <style name="TextNombreCuenta" parent="Theme.AppCompat">
+        <item name="android:fontFamily">@font/helveticanowtextregular</item>
+        <item name="android:gravity">left</item>
+        <item name="android:lineSpacingExtra">2sp</item>
+        <item name="android:textColor">@color/TEXT_COLOR_PRIMARY</item>
+        <item name="android:textSize">@dimen/BODY1</item>
+    </style>
 </resources>

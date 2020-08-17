@@ -11,5 +11,4 @@
         android:focusable="true"
         tools:ignore="MissingConstraints"
         android:scrollbars="vertical"/>
-
 </FrameLayout>
