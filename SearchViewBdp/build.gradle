@@ -2,6 +2,12 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+// Use this if the script is stored locally in the /gradle folder
+apply from: "$rootProject.projectDir/gradle/publish_github.gradle"
+
+// Or use this if the script is stored remotely somewhere:
+//apply from: "https://gist.github.com/user/publish.gradle"
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
