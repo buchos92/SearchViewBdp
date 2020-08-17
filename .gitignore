@@ -10,5 +10,6 @@
 .DS_Store
 /build
 /captures
+publish_github.gradle
 .externalNativeBuild
 .cxx
