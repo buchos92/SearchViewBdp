@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="searchbox_background_color">#FFC8C8C8</color>
+    <color name="searchbox_text_color">#323232</color>
+    <color name="searchbox_hint_text_color">#8C8C8C</color>
+    <color name="searchbox_icon_tint">#EFEFEF</color>
+    <color name="transparent">#00F44336</color>
+    <color name="default_color_expanded">#EFEFEF</color>
+</resources>
