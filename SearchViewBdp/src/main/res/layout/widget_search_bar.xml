@@ -34,7 +34,6 @@
                 android:layout_margin="@dimen/search_box_icon_margin"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:importantForAccessibility="no"
-                android:padding="@dimen/search_box_search_icon_padding"
                 android:src="@drawable/ic_baseline_search_24"
                 app:tint="@color/searchbox_icon_tint" />
 
@@ -50,6 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/search_box_text_left_margin"
                     android:textColor="@color/searchbox_text_color"
                     android:textColorHint="@color/searchbox_hint_text_color"
                     android:textSize="@dimen/search_collapsed_text_size" />
