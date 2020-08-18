@@ -11,7 +11,7 @@ Android Studio:
 Add the JitPack repository if you have not already:
 ```
     allprojects {
-        repositories {
+        repositories { 
             ...
             maven { url 'https://jitpack.io' }
         }
@@ -28,8 +28,30 @@ In your layout.
     One:
 ```
       <include layout="@layout/widget_search_bar"/>
+      
+      or
+      
+      <include
+            android:id="@+id/search_view_container"
+            layout="@layout/widget_search_bar"/>
+     
+```
+
+Create a class Item add @Parcelize and extend of ListSearchableAbs:
+
+@Parcelize
+class Items(
+    override var tittle: String,
+    override var description: String?,
+    override var additional: String?,
+    override var type: Int
+) : ListSearchableAbs()
+
+```
+
 ```
     Activity or Fragment:
+    - If your are used databinding, instead of findViewById(R.id.search_view_container) used binding.root.findViewById(R.id.search_view_container)
 ```
         // initialize your list of caterory and items
           val listSearchable = arrayListOf(
@@ -53,6 +75,7 @@ In your layout.
         searchViewLayout.setExpandedHint("Buscar...")
         searchViewLayout.setListToSearch(listSearchable)
 ```
+
 
 License
 Copyright 2020 Gabriel Torres
