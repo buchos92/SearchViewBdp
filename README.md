@@ -1,9 +1,61 @@
-SearchViewBdp
- -
+# Android SearchViewBdp Library
+ - SearchView Bdp is a library for to achive one better experiencie for the users
+   and the look and feel it awesome. With this library you can  integrate easely
+   and the search represented as a bar where the user can type the search result.
 
+
+## Usage
+
+Android Studio:
+
+Add the JitPack repository if you have not already:
+```
+    allprojects {
+        repositories {
+            ...
+            maven { url 'https://jitpack.io' }
+        }
+    }
+```
+Import it as a dependency:
+```
+    dependencies {
+    	        implementation 'com.github.buchos92:SearchViewBdp:Tag'
+    	}
+```
+
+In your layout.
+    One:
+```
+      <include layout="@layout/widget_search_bar"/>
+```
+    Activity or Fragment:
+```
+        // initialize your list of caterory and items
+          val listSearchable = arrayListOf(
+                  Items("CATEGORY","Description","",CATEGORY),
+                  Items("Test One","Description","",ITEM),
+                  Items("Test One","Description","",ITEM),
+                  Items("Test One","Description","",ITEM),
+                  Items("Test One","Description","",ITEM),
+                  Items("CATEGORY2","Description","",CATEGORY),
+                  Items("Test One","Description","",ITEM),
+                  Items("Test One","Description","",ITEM),
+                  Items("Test One","Description","",ITEM)
+              )
+
+        // set-up your class SearchViewBdp
+        val searchViewLayout: SearchViewBdp = findViewById(R.id.search_view_container)
+        searchViewLayout.setExpandedContentSupportFragment(this)
+
+        // optiona: if you want customaize
+        searchViewLayout.setCollapsedHint("Welcome to Bdp")
+        searchViewLayout.setExpandedHint("Buscar...")
+        searchViewLayout.setListToSearch(listSearchable)
+```
 
 License
-Copyright 2020 Rúben Sousa
+Copyright 2020 Gabriel Torres
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
