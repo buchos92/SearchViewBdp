@@ -10,21 +10,20 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.ViewPropertyAnimatorListener
 import kotlin.math.roundToInt
 
-
 class Utils {
     companion object{
         fun showInputMethod(view: View): Boolean {
-            val imm: InputMethodManager = view.getContext().getSystemService(
+            val imm: InputMethodManager = view.context.getSystemService(
                 Context.INPUT_METHOD_SERVICE
             ) as InputMethodManager
             return imm.showSoftInput(view, 0)
         }
 
         fun hideInputMethod(view: View): Boolean {
-            val imm: InputMethodManager = view.getContext().getSystemService(
+            val imm: InputMethodManager = view.context.getSystemService(
                 Context.INPUT_METHOD_SERVICE
             ) as InputMethodManager
-            return imm.hideSoftInputFromWindow(view.getWindowToken(), 0)
+            return imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
 
         // Animations Utils

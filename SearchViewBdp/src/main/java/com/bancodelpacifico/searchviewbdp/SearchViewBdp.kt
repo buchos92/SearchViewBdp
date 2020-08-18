@@ -9,7 +9,6 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.TransitionDrawable
 import android.os.Bundle
-import android.os.Parcelable
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
@@ -28,7 +27,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.bancodelpacifico.searchviewbdp.fragments.SearchListDefault
+import com.bancodelpacifico.searchviewbdp.fragments.ViewSearchCategory
 import com.bancodelpacifico.searchviewbdp.interfaces.ListSearchableAbs
 import com.bancodelpacifico.searchviewbdp.interfaces.OnToggleAnimationListener
 import com.bancodelpacifico.searchviewbdp.interfaces.SearchBoxListener
@@ -70,11 +69,14 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
     private val mFragmentManager: FragmentManager? = null
     private val mExpandedContentFragment: Fragment? = null
     private var mSupportFragmentManager: FragmentManager? = null
-    private var mExpandedContentSupportFragment: Fragment? = SearchListDefault()
+    private var mExpandedContentSupportFragment: Fragment? = ViewSearchCategory()
 
     companion object{
-        val CATEGORY:Int = 0
-        val ITEM:Int = 1
+        const val CATEGORY:Int = 0
+        const val ITEM:Int = 1
+
+        // config params of animation
+        const val PADDINGANIMATION = 2F
     }
 
     /* constructor(context: Context,attrs: AttributeSet?) : super(context,attrs) {
@@ -185,7 +187,7 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
         )
         mBackgroundTransition!!.isCrossFadeEnabled = true
         setBackgroundCompat()
-        Utils.setPaddingAll(this, 8F)
+        Utils.setPaddingAll(this, PADDINGANIMATION)
 
         super.onFinishInflate()
     }
@@ -198,7 +200,7 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
                 expand(true)
             }
     }
-    fun expand(requestFocus: Boolean) {
+    private fun expand(requestFocus: Boolean) {
         mCollapsedHeight = height
         mBackgroundTransition?.startTransition(ANIMATION_DURATION)
         mIsExpanded = true
@@ -208,7 +210,7 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
             mSearchEditText.requestFocus()
         }
     }
-    fun collapse() {
+    private fun collapse() {
         mBackgroundTransition?.reverseTransition(
             ANIMATION_DURATION
         )
@@ -278,7 +280,7 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
                     params.height = mExpandedHeight
                     layoutParams = params
                 } else {
-                    Utils.setPaddingAll(this@SearchViewBdp, 8F)
+                    Utils.setPaddingAll(this@SearchViewBdp, PADDINGANIMATION)
                 }
                 mOnToggleAnimationListener?.onFinish(expand)
             }
@@ -294,8 +296,8 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
             }
         })
         mAnimator!!.addUpdateListener(AnimatorUpdateListener { animation ->
-            var padding = (8 * animation.animatedFraction).toInt()
-            if (expand) padding = 8 - padding
+            var padding = (PADDINGANIMATION * animation.animatedFraction).toInt()
+            if (expand) padding = PADDINGANIMATION.toInt() - padding
             Utils.setPaddingAll(
                 this,
                 padding.toFloat()
@@ -342,7 +344,7 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
         )
         mBackgroundTransition!!.isCrossFadeEnabled = true
         setBackgroundCompat()
-        Utils.setPaddingAll(this@SearchViewBdp, 8F)
+        Utils.setPaddingAll(this@SearchViewBdp, PADDINGANIMATION)
     }
     fun setCollapsedHint(searchViewHint: String?) {
         if (searchViewHint != null) {

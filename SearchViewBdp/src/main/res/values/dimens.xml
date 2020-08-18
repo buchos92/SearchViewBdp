@@ -8,9 +8,9 @@
     <dimen name="search_bottom_margin">8dp</dimen>
     <dimen name="search_collapsed_text_size">14sp</dimen>
     <!-- Search box interior padding - left -->
-    <dimen name="search_box_left_padding">8dp</dimen>
+    <dimen name="search_box_left_padding">0dp</dimen>
     <!-- Search box interior padding - right -->
-    <dimen name="search_box_right_padding">8dp</dimen>
+    <dimen name="search_box_right_padding">0dp</dimen>
 
     <!-- Padding around the icon in the search box. -->
     <dimen name="search_box_icon_margin">4dp</dimen>
