@@ -70,8 +70,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/sent_to"
-            tools:srcCompat="@drawable/sent_to" />
+            android:src="@drawable/ic_baseline_search_24"
+            tools:srcCompat="@drawable/ic_baseline_search_24" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
