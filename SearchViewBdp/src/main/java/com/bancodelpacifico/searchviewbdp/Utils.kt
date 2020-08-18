@@ -122,11 +122,16 @@ class Utils {
             view.animate().alpha((if (expanding) 1 else 0.toFloat()) as Float)
                 .setDuration(duration / 2.toLong()).start()
         }
-        fun setPaddingAll(v: View, paddingInDp: Float) {
+        /*
+        *   paddingInDp : all
+        *   paddingAlt : left - right
+        * */
+        fun setPaddingAll(v: View, paddingInDp: Float, paddingAlt:Float? = null) {
+
             v.setPadding(
+                dpToPx(v.context, paddingAlt ?: paddingInDp),
                 dpToPx(v.context, paddingInDp),
-                dpToPx(v.context, paddingInDp),
-                dpToPx(v.context, paddingInDp),
+                dpToPx(v.context, paddingAlt ?: paddingInDp),
                 dpToPx(v.context, paddingInDp)
             )
         }

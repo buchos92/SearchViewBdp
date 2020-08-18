@@ -76,7 +76,7 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
         const val ITEM:Int = 1
 
         // config params of animation
-        const val PADDINGANIMATION = 2F
+        const val PADDINGANIMATION = 4F
     }
 
     /* constructor(context: Context,attrs: AttributeSet?) : super(context,attrs) {
@@ -187,7 +187,7 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
         )
         mBackgroundTransition!!.isCrossFadeEnabled = true
         setBackgroundCompat()
-        Utils.setPaddingAll(this, PADDINGANIMATION)
+        Utils.setPaddingAll(this, PADDINGANIMATION,8f)
 
         super.onFinishInflate()
     }
