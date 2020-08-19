@@ -28,10 +28,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.bancodelpacifico.searchviewbdp.fragments.ViewSearchCategory
-import com.bancodelpacifico.searchviewbdp.interfaces.ListSearchableAbs
-import com.bancodelpacifico.searchviewbdp.interfaces.OnToggleAnimationListener
-import com.bancodelpacifico.searchviewbdp.interfaces.SearchBoxListener
-import com.bancodelpacifico.searchviewbdp.interfaces.SearchListener
+import com.bancodelpacifico.searchviewbdp.interfaces.*
 
 
 class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(context,attributeSet) {
@@ -47,7 +44,7 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
     private lateinit var mExpandedSearchIcon:View
 
     private var mToolbar: Toolbar? = null
-    private var listSearchable:ArrayList<out ListSearchableAbs > = arrayListOf()
+    private var listSearchable:ArrayList<ItemsModel > = arrayListOf()
 
     private var toolbarExpandedHeight = 0
     private var mExpandedHeight = 0
@@ -71,7 +68,10 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
     private var mSupportFragmentManager: FragmentManager? = null
     private var mExpandedContentSupportFragment: Fragment? = ViewSearchCategory()
 
+    private var searchEngine:SearchEngine = SearchEngine()
+
     companion object{
+        // types of items
         const val CATEGORY:Int = 0
         const val ITEM:Int = 1
 
@@ -143,6 +143,7 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
                         ANIMATION_DURATION
                     )
                 }
+
                 mSearchBoxListener?.onTextChanged(
                     s,
                     start,
@@ -368,7 +369,8 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
         mSearchBoxListener = listener
     }
 
-    fun setListToSearch(listSearchable:ArrayList<out ListSearchableAbs>){
+    fun setListToSearch(listSearchable:ArrayList<ItemsModel>){
+        this.searchEngine.itemsModel = listSearchable
         this.listSearchable = listSearchable
     }
 }

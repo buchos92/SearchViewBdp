@@ -9,9 +9,9 @@ import com.bancodelpacifico.searchviewbdp.R
 import com.bancodelpacifico.searchviewbdp.SearchViewBdp
 import com.bancodelpacifico.searchviewbdp.adapter.holder.ListHolderCategory
 import com.bancodelpacifico.searchviewbdp.adapter.holder.ListHolderItems
-import com.bancodelpacifico.searchviewbdp.interfaces.ListSearchableAbs
+import com.bancodelpacifico.searchviewbdp.interfaces.ItemsModel
 
-class AdpaterMultipleCategory(var items : ArrayList<out ListSearchableAbs>) :
+class AdpaterMultipleCategory(var items : ArrayList<out ItemsModel>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val CATEGORY = 0
@@ -29,7 +29,7 @@ class AdpaterMultipleCategory(var items : ArrayList<out ListSearchableAbs>) :
             (holder as ListHolderItems).bindItems(item,theLastItemIsCategory(items, position))
     }
 
-    private fun theLastItemIsCategory(items: ArrayList<out ListSearchableAbs>, position: Int):Boolean{
+    private fun theLastItemIsCategory(items: ArrayList<out ItemsModel>, position: Int):Boolean{
         if(items.isNotEmpty() && position > (items.size - 1)){
             return items[position - 1].type == CATEGORY
         }

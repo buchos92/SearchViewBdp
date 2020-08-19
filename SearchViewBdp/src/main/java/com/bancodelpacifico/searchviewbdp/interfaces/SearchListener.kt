@@ -2,6 +2,7 @@ package com.bancodelpacifico.searchviewbdp.interfaces
 
 import android.os.Parcelable
 import android.text.Editable
+import kotlinx.android.parcel.Parcelize
 
 interface SearchListener {
     fun onFinished(searchKeyword: String?)
@@ -11,12 +12,13 @@ interface OnToggleAnimationListener {
     fun onFinish(expanded: Boolean)
 }
 
-abstract class ListSearchableAbs : Parcelable {
-    open lateinit var tittle      :String
-    open var description : String? = null
-    open var additional :String? = null
-    open var type :Int = 0
-}
+@Parcelize
+class ItemsModel( var tittle: String,
+                  var description: String? = "",
+                  var additional: String? = "",
+                  var type: Int,
+                  var iconItem: Int? = null,
+                  var categoryId:Int) : Parcelable
 /***
  * Interface for listening to search edit text.
  */

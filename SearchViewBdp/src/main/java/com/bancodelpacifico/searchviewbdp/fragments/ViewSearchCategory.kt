@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bancodelpacifico.searchviewbdp.R
 import com.bancodelpacifico.searchviewbdp.adapter.AdpaterMultipleCategory
-import com.bancodelpacifico.searchviewbdp.interfaces.ListSearchableAbs
+import com.bancodelpacifico.searchviewbdp.interfaces.ItemsModel
 
 
 class ViewSearchCategory : Fragment() {
@@ -31,7 +31,7 @@ class ViewSearchCategory : Fragment() {
         return rootView
     }
 
-    private fun setRecyclerViewOfList(items: ArrayList<out ListSearchableAbs>){
+    private fun setRecyclerViewOfList(items: ArrayList<out ItemsModel>){
         linearLayoutManager = LinearLayoutManager(requireContext())
         recyclerView.layoutManager = linearLayoutManager
         adpaterMultipleCategory =

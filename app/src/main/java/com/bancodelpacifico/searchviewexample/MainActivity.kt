@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bancodelpacifico.searchviewbdp.SearchViewBdp
 import com.bancodelpacifico.searchviewbdp.SearchViewBdp.Companion.CATEGORY
 import com.bancodelpacifico.searchviewbdp.SearchViewBdp.Companion.ITEM
+import com.bancodelpacifico.searchviewbdp.interfaces.ItemsModel
 import com.bancodelpacifico.searchviewbdp.interfaces.SearchBoxListener
 import com.bancodelpacifico.searchviewbdp.interfaces.SearchListener
 
@@ -17,15 +18,15 @@ class MainActivity : AppCompatActivity() {
 
         // first step is create of object that extend of ListSearchableInterface
         val listSearchable = arrayListOf(
-            Items("CATEGORY","Description","",CATEGORY),
-            Items("Test One","Description","",ITEM),
-            Items("Test One","Description","",ITEM),
-            Items("Test One","Description","",ITEM),
-            Items("Test One","Description","",ITEM),
-            Items("CATEGORY2","Description","",CATEGORY),
-            Items("Test One","Description","",ITEM),
-            Items("Test One","Description","",ITEM),
-            Items("Test One","Description","",ITEM)
+                ItemsModel("CATEGORY - 1","Description",type = CATEGORY , categoryId = 0),
+                ItemsModel("Test One","Description","",ITEM , iconItem = R.drawable.ic_baseline_arrow_back_24, categoryId = 0),
+                ItemsModel("Test One","Description","",ITEM ,categoryId = 0),
+                ItemsModel("Test One","Description","",ITEM,categoryId = 0),
+
+                ItemsModel("CATEGORY - 2","Description",type = CATEGORY,categoryId = 1),
+                ItemsModel("Test One","Description","",ITEM,iconItem = R.drawable.ic_baseline_search_24,categoryId = 0),
+                ItemsModel("Test One","Description","",ITEM,categoryId = 1),
+                ItemsModel("Test One","Description","",ITEM,categoryId = 1)
         )
 
         // set Up searchView bdp

@@ -23,7 +23,7 @@
             android:layout_marginTop="@dimen/M"
             android:maxLines="1"
             android:text="@string/lorem_ipsum"
-            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintStart_toEndOf="@+id/iconItem"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -34,7 +34,7 @@
             android:layout_marginStart="@dimen/M"
             android:maxLines="1"
             android:text="@string/lorem_ipsum"
-            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintStart_toEndOf="@+id/iconItem"
             app:layout_constraintTop_toBottomOf="@+id/title" />
 
         <TextView
@@ -46,7 +46,7 @@
             android:maxLines="1"
             android:text="@string/lorem_ipsum"
             app:layout_constraintEnd_toEndOf="@+id/description"
-            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintStart_toEndOf="@+id/iconItem"
             app:layout_constraintTop_toBottomOf="@+id/description" />
 
 
@@ -63,7 +63,7 @@
             app:layout_constraintVertical_bias="1.0" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/iconItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/M"
