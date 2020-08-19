@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/searchbox_background_color">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        tools:layout_editor_absoluteX="0dp"
+        android:layout_margin="@dimen/M">
+
+        <TextView
+            android:fontFamily="@font/helveticanowdisplaybold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textColor="#191c1e"
+            android:textSize="19sp"
+            android:lineSpacingExtra="2sp"
+            android:text="No existen resultados" />
+
+        <TextView
+            android:fontFamily="@font/helveticanowtextregular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/S"
+            android:gravity="center_horizontal"
+            android:textAlignment="center"
+            android:textColor="#636d77"
+            android:textSize="19sp"
+            android:text="Puedes intentar nuevamente tu búsqueda o también puedes registrar una cuenta o número para enviar dinero." />
+
+        <Button
+            android:id="@+id/BUTTON_LOGIN"
+            style="@style/BUTTON"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/M"
+            android:text="@string/BUTTON_REGISTER_ACCOUNT"/>
+
+        <Button
+            android:id="@+id/BUTTON_REGISTER_CELL_PHONE"
+            style="@style/BUTTON"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/S"
+            android:layout_marginBottom="@dimen/XL"
+            android:text="@string/BUTTON_REGISTER_CELL_PHONE"/>
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
+</androidx.constraintlayout.widget.ConstraintLayout>

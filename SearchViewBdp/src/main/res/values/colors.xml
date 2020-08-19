@@ -20,4 +20,9 @@
     <color name="COLOR_BACKGROUND_CATEGORY">#eceff1</color>
     <color name="TEXT_COLOR_PRIMARY_VARIANT" category="general">#636d77</color>
     <color name="TEXT_COLOR_PRIMARY" category="general">#191c1e</color>
+    <color name="BACKGROUND_COLOR_SECONDARY" category="general">#eceff1</color>
+    <color name="BACKGROUND_COLOR_PRIMARY_DARK" category="general">#002a66</color>
+
+    <color name="TEXT_COLOR_LIGHT" category="general">#ffffff</color>
+    <color name="TEXT_COLOR_SECONDARY" category="general">#005eb8</color>
 </resources>

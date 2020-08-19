@@ -27,11 +27,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.bancodelpacifico.searchviewbdp.fragments.ViewSearchCategory
+import com.bancodelpacifico.searchviewbdp.view.ViewSearchCategory
+import com.bancodelpacifico.searchviewbdp.view.ViewSearchNotMatch
 import com.bancodelpacifico.searchviewbdp.interfaces.*
 
 
-class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(context,attributeSet) {
+class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(context,attributeSet),SearchListenerOn {
 
     private lateinit var mCollapsed:ViewGroup
     private lateinit var mSearchIcon:View
@@ -66,8 +67,8 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
     private val mFragmentManager: FragmentManager? = null
     private val mExpandedContentFragment: Fragment? = null
     private var mSupportFragmentManager: FragmentManager? = null
-    private var mExpandedContentSupportFragment: Fragment? = ViewSearchCategory()
-
+    private var mExpandedContentCurrentViewSearch : ViewSearchCategory? = ViewSearchCategory()
+    private val mExpandetContentFragmentNoMatch : ViewSearchNotMatch = ViewSearchNotMatch()
     private var searchEngine:SearchEngine = SearchEngine()
 
     companion object{
@@ -79,6 +80,9 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
         const val PADDINGANIMATION = 4F
     }
 
+    init {
+        mExpandedContentCurrentViewSearch!!.setSearchListenerOn(this)
+    }
     /* constructor(context: Context,attrs: AttributeSet?) : super(context,attrs) {
          //ANIMATION_DURATION = context.getResources().getInteger(R.integer.animation_duration);
      }*/
@@ -125,7 +129,7 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
         })
         mSearchEditText.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(
-                s: CharSequence,
+                phrases: CharSequence,
                 start: Int,
                 before: Int,
                 count: Int
@@ -137,19 +141,33 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
                             ANIMATION_DURATION
                         )
                     }
+                    // also show las search
+                    showContentFragment()
                 } else {
                     Utils.fadeOut(
                         mExpandedSearchIcon,
                         ANIMATION_DURATION
                     )
                 }
-
+                // response to interface
                 mSearchBoxListener?.onTextChanged(
-                    s,
+                    phrases,
                     start,
                     before,
                     count
                 )
+                /*val listSearchable = arrayListOf(
+                    ItemsModel("CATEGORY - 1","Description",type = CATEGORY , categoryId = 0),
+                    ItemsModel("Test One","Description","",ITEM , iconItem = R.drawable.ic_baseline_arrow_back_24, categoryId = 0)
+                )*/
+                // PROCESS FOR SEARCH
+                val listResultSearch = searchEngine.searchItem(phrases)
+
+                if(listResultSearch.size > 0 )
+                    mExpandedContentCurrentViewSearch!!.addNewItems(listResultSearch)
+                else
+                    showContentNotMatchResult()
+
             }
 
             override fun beforeTextChanged(
@@ -223,7 +241,7 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
             mExpanded,
             ANIMATION_DURATION
         )
-        //hideContentFragment()
+        hideContentFragment()
     }
     private fun setBackgroundCompat() {
         background = mBackgroundTransition
@@ -260,7 +278,7 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
         activity: FragmentActivity,
         contentSupportFragment: Fragment? = null
     ) {
-        mExpandedContentSupportFragment = contentSupportFragment ?: mExpandedContentSupportFragment
+        //mExpandedContentSupportFragment = contentSupportFragment ?: mExpandedContentSupportFragment
         mSupportFragmentManager = activity.supportFragmentManager
         mExpandedHeight = Utils.getSizeOfScreen(activity)!!.y
     }
@@ -312,8 +330,18 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
         // load items into bundle
         val bundle = Bundle()
         bundle.putParcelableArrayList("listOfItems",listSearchable)
-        mExpandedContentSupportFragment!!.arguments = bundle
+        mExpandedContentCurrentViewSearch!!.arguments = bundle
 
+        // replace fragment content
+        replaceFragmentContent(mExpandedContentCurrentViewSearch)
+    }
+
+    private fun showContentNotMatchResult() {
+        // replace fragment content
+        replaceFragmentContent(mExpandetContentFragmentNoMatch)
+    }
+
+    private fun replaceFragmentContent(fragment: Fragment?){
         // replace fragment content
         if (mFragmentManager != null) {
             val transaction: FragmentTransaction = mFragmentManager.beginTransaction()
@@ -321,16 +349,28 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
                 R.animator.fade_in_object_animator,
                 R.animator.fade_out_object_animator
             )
-            transaction.replace(R.id.search_expanded_content, mExpandedContentFragment!!)
+            transaction.replace(R.id.search_expanded_content, fragment!!)
             transaction.commit()
         } else if (mSupportFragmentManager != null) {
             val transaction = mSupportFragmentManager!!.beginTransaction()
             transaction.setCustomAnimations(R.anim.fade_in_anim_set, R.anim.fade_out_anim_set)
-            transaction.replace(R.id.search_expanded_content, mExpandedContentSupportFragment!!)
+            transaction.replace(R.id.search_expanded_content, fragment!!)
             transaction.commit()
         }
     }
 
+    private fun hideContentFragment() {
+        if (mFragmentManager != null) {
+            val transaction: FragmentTransaction = mFragmentManager.beginTransaction()
+            mExpandedContentFragment?.let { transaction.remove(it).commit() }
+        } else if (mSupportFragmentManager != null) {
+            val transaction: FragmentTransaction =
+                mSupportFragmentManager!!.beginTransaction()
+            mExpandedContentCurrentViewSearch?.let { transaction.remove(it).commit() }
+        } else {
+            //
+        }
+    }
     fun setTransitionDrawables(
         collapsedDrawable: Drawable?,
         expandedDrawable: Drawable?
@@ -372,5 +412,13 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
     fun setListToSearch(listSearchable:ArrayList<ItemsModel>){
         searchEngine.setItemsModel(listSearchable)
         this.listSearchable = listSearchable
+    }
+
+    override fun searchItem() {
+        TODO("Not yet implemented")
+    }
+
+    override fun addItems() {
+        TODO("Not yet implemented")
     }
 }

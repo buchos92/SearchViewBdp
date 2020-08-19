@@ -1,4 +1,4 @@
-package com.bancodelpacifico.searchviewbdp.fragments
+package com.bancodelpacifico.searchviewbdp.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bancodelpacifico.searchviewbdp.R
 import com.bancodelpacifico.searchviewbdp.adapter.AdpaterMultipleCategory
 import com.bancodelpacifico.searchviewbdp.interfaces.ItemsModel
+import com.bancodelpacifico.searchviewbdp.interfaces.SearchListenerOn
 
 
 class ViewSearchCategory : Fragment() {
@@ -17,6 +18,7 @@ class ViewSearchCategory : Fragment() {
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var recyclerView:RecyclerView
     private lateinit var adpaterMultipleCategory: AdpaterMultipleCategory
+    private lateinit var searchListenerOn: SearchListenerOn
     private val ITEMS = "listOfItems"
 
     override fun onCreateView(
@@ -30,8 +32,10 @@ class ViewSearchCategory : Fragment() {
         setRecyclerViewOfList(arguments?.getParcelableArrayList(ITEMS)!!)
         return rootView
     }
-
-    private fun setRecyclerViewOfList(items: ArrayList<out ItemsModel>){
+    fun setSearchListenerOn(searchListenerOn: SearchListenerOn){
+        this.searchListenerOn = searchListenerOn
+    }
+    private fun setRecyclerViewOfList(items: MutableList<ItemsModel>){
         linearLayoutManager = LinearLayoutManager(requireContext())
         recyclerView.layoutManager = linearLayoutManager
         adpaterMultipleCategory =
@@ -39,6 +43,9 @@ class ViewSearchCategory : Fragment() {
                 items
             )
         recyclerView.adapter = adpaterMultipleCategory
+    }
+    fun addNewItems(items: MutableList<ItemsModel>){
+        adpaterMultipleCategory.addNewItems(items)
     }
 }
 

@@ -15,9 +15,9 @@
         android:id="@+id/search_expanded_box"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="@drawable/rounded_corners"
+        android:background="@drawable/border_bottom_gris"
         android:orientation="horizontal"
-        android:gravity="center_vertical" >
+        android:gravity="center_vertical">
         <ImageButton
             android:id="@+id/search_expanded_back_button"
             android:layout_width="56dp"

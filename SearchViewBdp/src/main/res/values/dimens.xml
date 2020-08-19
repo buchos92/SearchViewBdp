@@ -50,4 +50,6 @@
     <dimen name="XXL" category="general">64dp</dimen>
     <dimen name="BODY2" category="general">15sp</dimen>
 
+
+    <dimen name="BORDER_RADIUS_MEDIUM" category="general">8dp</dimen>
 </resources>

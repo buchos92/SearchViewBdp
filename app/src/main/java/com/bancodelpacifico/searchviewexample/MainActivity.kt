@@ -19,14 +19,14 @@ class MainActivity : AppCompatActivity() {
         // first step is create of object that extend of ListSearchableInterface
         val listSearchable = arrayListOf(
                 ItemsModel("CATEGORY - 1","Description",type = CATEGORY , categoryId = 0),
-                ItemsModel("Test One","Description","",ITEM , iconItem = R.drawable.ic_baseline_arrow_back_24, categoryId = 0),
-                ItemsModel("Test One","Description","",ITEM ,categoryId = 0),
-                ItemsModel("Test One","Description","",ITEM,categoryId = 0),
+                ItemsModel("Manuel","Marcos","",ITEM , iconItem = R.drawable.ic_baseline_arrow_back_24, categoryId = 0),
+                ItemsModel("Gabriel","Description","",ITEM ,categoryId = 0),
+                ItemsModel("Marcos","Gabriel","",ITEM,categoryId = 0),
 
-                ItemsModel("CATEGORY - 2","Description",type = CATEGORY,categoryId = 0),
-                ItemsModel("Test One","Description","",ITEM,iconItem = R.drawable.ic_baseline_search_24,categoryId = 0),
-                ItemsModel("Test One","Description","",ITEM,categoryId = 1),
-                ItemsModel("Test One","Description","",ITEM,categoryId = 1)
+                ItemsModel("CATEGORY - 2","Description",type = CATEGORY,categoryId = 1),
+                ItemsModel("Gabriel","Manuel","",ITEM,iconItem = R.drawable.ic_baseline_search_24,categoryId = 0),
+                ItemsModel("Manuel One","Description","",ITEM,categoryId = 1),
+                ItemsModel("Marcos","Gabriel","",ITEM,categoryId = 1)
         )
 
         // set Up searchView bdp
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         searchViewLayout.setCollapsedHint("Welcome to Bdp")
         searchViewLayout.setExpandedHint("Buscar...")
-        //searchViewLayout.setListToSearch(listSearchable)
+        searchViewLayout.setListToSearch(listSearchable)
 
         searchViewLayout.setSearchListener(object:
             SearchListener {

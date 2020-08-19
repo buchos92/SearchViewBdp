@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BUTTON" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_secondary</item>
+        <item name="android:layout_height">44dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">@dimen/BODY1</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">@font/helveticanowtextregular</item>
+        <item name="android:textColor">@color/text_color_secondary</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+</resources>
