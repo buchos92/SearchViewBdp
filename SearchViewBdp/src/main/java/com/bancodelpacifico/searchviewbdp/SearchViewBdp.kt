@@ -141,8 +141,7 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
                             ANIMATION_DURATION
                         )
                     }
-                    // also show las search
-                    showContentFragment()
+
                 } else {
                     Utils.fadeOut(
                         mExpandedSearchIcon,
@@ -160,14 +159,19 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
                     ItemsModel("CATEGORY - 1","Description",type = CATEGORY , categoryId = 0),
                     ItemsModel("Test One","Description","",ITEM , iconItem = R.drawable.ic_baseline_arrow_back_24, categoryId = 0)
                 )*/
+
+                // also show las search
                 // PROCESS FOR SEARCH
                 val listResultSearch = searchEngine.searchItem(phrases)
 
-                if(listResultSearch.size > 0 )
+                if(listResultSearch.size > 0 ){
                     mExpandedContentCurrentViewSearch!!.addNewItems(listResultSearch)
-                else
+                    showContextMatchResult()
+                }else{
                     showContentNotMatchResult()
+                    mExpandedContentCurrentViewSearch!!.addNewItems(listSearchable)
 
+                }
             }
 
             override fun beforeTextChanged(
@@ -336,6 +340,10 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
         replaceFragmentContent(mExpandedContentCurrentViewSearch)
     }
 
+    private fun showContextMatchResult(){
+        // replace fragment content
+        replaceFragmentContent(mExpandedContentCurrentViewSearch)
+    }
     private fun showContentNotMatchResult() {
         // replace fragment content
         replaceFragmentContent(mExpandetContentFragmentNoMatch)
@@ -411,7 +419,7 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
 
     fun setListToSearch(listSearchable:ArrayList<ItemsModel>){
         searchEngine.setItemsModel(listSearchable)
-        this.listSearchable = listSearchable
+        this.listSearchable.addAll(listSearchable)
     }
 
     override fun searchItem() {

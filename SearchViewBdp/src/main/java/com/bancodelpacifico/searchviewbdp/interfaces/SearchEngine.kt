@@ -40,8 +40,7 @@ class SearchEngine {
                     resultSearch.add(it)
                 }
         }
-        // validate  is result just have category
-        //resultSearch.
+
         return resultSearch.toMutableList()
     }
 
