@@ -1,7 +1,6 @@
 package com.bancodelpacifico.searchviewbdp.interfaces
 
 import com.bancodelpacifico.searchviewbdp.R
-import com.bancodelpacifico.searchviewbdp.SearchViewBdp
 import com.bancodelpacifico.searchviewbdp.SearchViewBdp.Companion.CATEGORY
 import com.bancodelpacifico.searchviewbdp.SearchViewBdp.Companion.ITEM
 import org.junit.jupiter.api.Test
@@ -11,9 +10,7 @@ import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.TestInstance
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
-import org.mockito.Spy
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class SearchEngineTest {

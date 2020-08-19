@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
                 ItemsModel("Test One","Description","",ITEM ,categoryId = 0),
                 ItemsModel("Test One","Description","",ITEM,categoryId = 0),
 
-                ItemsModel("CATEGORY - 2","Description",type = CATEGORY,categoryId = 1),
+                ItemsModel("CATEGORY - 2","Description",type = CATEGORY,categoryId = 0),
                 ItemsModel("Test One","Description","",ITEM,iconItem = R.drawable.ic_baseline_search_24,categoryId = 0),
                 ItemsModel("Test One","Description","",ITEM,categoryId = 1),
                 ItemsModel("Test One","Description","",ITEM,categoryId = 1)
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         searchViewLayout.setCollapsedHint("Welcome to Bdp")
         searchViewLayout.setExpandedHint("Buscar...")
-        searchViewLayout.setListToSearch(listSearchable)
+        //searchViewLayout.setListToSearch(listSearchable)
 
         searchViewLayout.setSearchListener(object:
             SearchListener {

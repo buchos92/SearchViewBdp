@@ -370,7 +370,7 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
     }
 
     fun setListToSearch(listSearchable:ArrayList<ItemsModel>){
-        this.searchEngine.itemsModel = listSearchable
+        searchEngine.setItemsModel(listSearchable)
         this.listSearchable = listSearchable
     }
 }

@@ -3,18 +3,28 @@ package com.bancodelpacifico.searchviewbdp.interfaces
 import com.bancodelpacifico.searchviewbdp.SearchViewBdp.Companion.CATEGORY
 import kotlin.collections.ArrayList
 
-class SearchEngine(var itemsModel: ArrayList<ItemsModel>? = null) {
+class SearchEngine {
     var items : List<ItemsModel>? = null
 
-    fun searchItem(){
-        var itemsModel = itemsModel  ?: throw IllegalArgumentException("Items Mode required")
+    fun setItemsModel(value: ArrayList<ItemsModel>?){
+        val itemsModel = value ?: throw IllegalArgumentException("Items Mode required")
         items = itemsModel
 
+        if(isDuplicateCategory())
+            throw IllegalArgumentException("Categories are repeated")
+    }
+    fun searchItem(){
         val listCategory = filterFor(items!!,CATEGORY)
         val listItems = filterFor(items!!,CATEGORY)
 
     }
 
+    fun isDuplicateCategory():Boolean{
+        val categories = filterFor(items!!, CATEGORY)
+        val listIdCategories = getCategoryId(categories)
+
+        return hasDuplicates(listIdCategories)
+    }
     val filterFor: (List<ItemsModel> ,Int) -> List<ItemsModel>  = { item:List<ItemsModel> ,type:Int ->  item.filter { it.type == type }}
 
     fun getCategoryId(items: List<ItemsModel>):Array<Int>{
