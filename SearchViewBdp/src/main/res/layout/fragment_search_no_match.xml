@@ -40,7 +40,7 @@
             android:text="Puedes intentar nuevamente tu búsqueda o también puedes registrar una cuenta o número para enviar dinero." />
 
         <Button
-            android:id="@+id/BUTTON_LOGIN"
+            android:id="@+id/BUTTON_REGISTER_ACCOUNT"
             style="@style/BUTTON"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

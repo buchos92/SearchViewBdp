@@ -1,4 +1,6 @@
 package com.bancodelpacifico.searchviewbdp.interfaces
 
-interface onListenerButton {
+interface OnListenerButton {
+    fun button1()
+    fun button2()
 }

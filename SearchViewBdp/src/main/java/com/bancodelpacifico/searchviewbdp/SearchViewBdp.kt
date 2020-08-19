@@ -32,7 +32,7 @@ import com.bancodelpacifico.searchviewbdp.view.ViewSearchNotMatch
 import com.bancodelpacifico.searchviewbdp.interfaces.*
 
 
-class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(context,attributeSet),SearchListenerOn {
+class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(context,attributeSet),OnListenerButton{
 
     private lateinit var mCollapsed:ViewGroup
     private lateinit var mSearchIcon:View
@@ -71,6 +71,8 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
     private val mExpandetContentFragmentNoMatch : ViewSearchNotMatch = ViewSearchNotMatch()
     private var searchEngine:SearchEngine = SearchEngine()
 
+    private lateinit var onListenerButton: OnListenerButton
+
     companion object{
         // types of items
         const val CATEGORY:Int = 0
@@ -81,7 +83,7 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
     }
 
     init {
-        mExpandedContentCurrentViewSearch!!.setSearchListenerOn(this)
+        mExpandetContentFragmentNoMatch.setSearchListenerOn(this)
     }
     /* constructor(context: Context,attrs: AttributeSet?) : super(context,attrs) {
          //ANIMATION_DURATION = context.getResources().getInteger(R.integer.animation_duration);
@@ -155,12 +157,8 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
                     before,
                     count
                 )
-                /*val listSearchable = arrayListOf(
-                    ItemsModel("CATEGORY - 1","Description",type = CATEGORY , categoryId = 0),
-                    ItemsModel("Test One","Description","",ITEM , iconItem = R.drawable.ic_baseline_arrow_back_24, categoryId = 0)
-                )*/
 
-                // also show las search
+
                 // PROCESS FOR SEARCH
                 val listResultSearch = searchEngine.searchItem(phrases)
 
@@ -170,7 +168,6 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
                 }else{
                     showContentNotMatchResult()
                     mExpandedContentCurrentViewSearch!!.addNewItems(listSearchable)
-
                 }
             }
 
@@ -422,11 +419,14 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
         this.listSearchable.addAll(listSearchable)
     }
 
-    override fun searchItem() {
-        TODO("Not yet implemented")
+    fun setSearchListenerOn(onListenerButton: OnListenerButton){
+        this.onListenerButton = onListenerButton
+    }
+    override fun button1() {
+        onListenerButton.button1()
     }
 
-    override fun addItems() {
-        TODO("Not yet implemented")
+    override fun button2() {
+        onListenerButton.button1()
     }
 }
