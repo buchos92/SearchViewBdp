@@ -17,7 +17,7 @@ class ViewSearchCategory : Fragment() {
 
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var recyclerView:RecyclerView
-    private lateinit var adpaterMultipleCategory: AdpaterMultipleCategory
+    private var adpaterMultipleCategory = AdpaterMultipleCategory()
     private lateinit var searchListenerOn: SearchListenerOn
     private val ITEMS = "listOfItems"
 
@@ -29,20 +29,18 @@ class ViewSearchCategory : Fragment() {
         val rootView: View = inflater.inflate(R.layout.fragment_search_static_list, container, false)
         recyclerView = rootView.findViewById(R.id.recycler_view)
 
-        setRecyclerViewOfList(arguments?.getParcelableArrayList(ITEMS)!!)
+        setRecyclerViewOfList()
         return rootView
     }
-    private fun setRecyclerViewOfList(items: MutableList<ItemsModel>){
+    private fun setRecyclerViewOfList(){
         linearLayoutManager = LinearLayoutManager(requireContext())
         recyclerView.layoutManager = linearLayoutManager
-        adpaterMultipleCategory =
-            AdpaterMultipleCategory(
-                items
-            )
         recyclerView.adapter = adpaterMultipleCategory
     }
     fun addNewItems(items: MutableList<ItemsModel>){
-        adpaterMultipleCategory.addNewItems(items)
+        adpaterMultipleCategory.apply {
+            addNewItems(items)
+        }
     }
 }
 

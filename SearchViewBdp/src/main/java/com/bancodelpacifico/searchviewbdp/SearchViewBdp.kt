@@ -295,7 +295,8 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
             override fun onAnimationEnd(animation: Animator) {
                 if (expand) {
                     Utils.setPaddingAll(this@SearchViewBdp, 0F)
-                    showContentFragment()
+                    showContextMatchResult()
+                    mExpandedContentCurrentViewSearch!!.addNewItems(listSearchable)
                     val params = layoutParams
                     params.height = mExpandedHeight
                     layoutParams = params
@@ -325,16 +326,6 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
         })
         mAnimator!!.duration = ANIMATION_DURATION.toLong()
         mAnimator!!.start()
-    }
-
-    private fun showContentFragment() {
-        // load items into bundle
-        val bundle = Bundle()
-        bundle.putParcelableArrayList("listOfItems",listSearchable)
-        mExpandedContentCurrentViewSearch!!.arguments = bundle
-
-        // replace fragment content
-        replaceFragmentContent(mExpandedContentCurrentViewSearch)
     }
 
     private fun showContextMatchResult(){

@@ -11,27 +11,28 @@ import com.bancodelpacifico.searchviewbdp.adapter.holder.ListHolderCategory
 import com.bancodelpacifico.searchviewbdp.adapter.holder.ListHolderItems
 import com.bancodelpacifico.searchviewbdp.interfaces.ItemsModel
 
-class AdpaterMultipleCategory(var items : MutableList<ItemsModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AdpaterMultipleCategory(var items : MutableList<ItemsModel>? = mutableListOf()) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val CATEGORY = 0
     private val ITEM = 1
 
     override fun getItemCount(): Int {
-        return items.size
+        return items?.size!!
     }
     /* Method Custom* */
     fun addNewItems(itemsList: MutableList<out ItemsModel>) {
-        items.clear()
-        items.addAll(itemsList)
+        items?.clear()
+        items?.addAll(itemsList)
         notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val item = items[position]
-        if(item.type == CATEGORY)
+        items?.size ?: return
+        val item = items?.get(position)
+        if(item?.type == CATEGORY)
             (holder as ListHolderCategory).bindItems(item)
         else
-            (holder as ListHolderItems).bindItems(item,theLastItemIsCategory(items, position))
+            (holder as ListHolderItems).bindItems(item,theLastItemIsCategory(items!!, position))
     }
 
     private fun theLastItemIsCategory(items: MutableList<out ItemsModel>, position: Int):Boolean{
@@ -45,7 +46,8 @@ class AdpaterMultipleCategory(var items : MutableList<ItemsModel>) : RecyclerVie
             .inflate(layoutRes, this, attachToRoot)
     }
     override fun getItemViewType(position: Int): Int {
-        return if (items[position].type == CATEGORY)
+        items?.size ?: return 0
+        return if (items!![position].type == CATEGORY)
             SearchViewBdp.CATEGORY
         else
             SearchViewBdp.ITEM
