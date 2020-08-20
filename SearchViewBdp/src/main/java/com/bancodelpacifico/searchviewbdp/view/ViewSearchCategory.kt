@@ -32,9 +32,6 @@ class ViewSearchCategory : Fragment() {
         setRecyclerViewOfList(arguments?.getParcelableArrayList(ITEMS)!!)
         return rootView
     }
-    fun setSearchListenerOn(searchListenerOn: SearchListenerOn){
-        this.searchListenerOn = searchListenerOn
-    }
     private fun setRecyclerViewOfList(items: MutableList<ItemsModel>){
         linearLayoutManager = LinearLayoutManager(requireContext())
         recyclerView.layoutManager = linearLayoutManager
