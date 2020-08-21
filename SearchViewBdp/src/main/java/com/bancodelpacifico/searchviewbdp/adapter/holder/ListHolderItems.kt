@@ -19,7 +19,7 @@ class ListHolderItems(v: View,var onListenerButton:OnListenerButton): RecyclerVi
         items = item
         view.title.text = item?.tittle
         view.description.text = item?.description
-        view.additional.text = item?.tittle
+        view.additional.text = item?.additional
 
         // icons
         val iconItem = item?.iconItem ?: R.drawable.ic_baseline_search_24
