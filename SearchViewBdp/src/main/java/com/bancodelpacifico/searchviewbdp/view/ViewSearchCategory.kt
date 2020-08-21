@@ -1,6 +1,7 @@
 package com.bancodelpacifico.searchviewbdp.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,16 +11,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bancodelpacifico.searchviewbdp.R
 import com.bancodelpacifico.searchviewbdp.adapter.AdpaterMultipleCategory
 import com.bancodelpacifico.searchviewbdp.interfaces.ItemsModel
-import com.bancodelpacifico.searchviewbdp.interfaces.SearchListenerOn
+import com.bancodelpacifico.searchviewbdp.interfaces.OnListenerButton
 
 
-class ViewSearchCategory : Fragment() {
+class ViewSearchCategory(onListenerButton: OnListenerButton) : Fragment() {
 
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var recyclerView:RecyclerView
-    private var adpaterMultipleCategory = AdpaterMultipleCategory()
-    private lateinit var searchListenerOn: SearchListenerOn
-    private val ITEMS = "listOfItems"
+    private var adpaterMultipleCategory = AdpaterMultipleCategory(onListenerButton = onListenerButton)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,5 +46,17 @@ class ViewSearchCategory : Fragment() {
             addNewItems(items)
         }
     }
+
+  /*  override fun button1() {
+        TODO("Not yet implemented")
+    }
+
+    override fun button2() {
+        TODO("Not yet implemented")
+    }
+*/
+ /*   override fun onClickItemSelection(itemsModel: ItemsModel) {
+        onListenerButton.onClickItemSelection(itemsModel)
+    }*/
 }
 

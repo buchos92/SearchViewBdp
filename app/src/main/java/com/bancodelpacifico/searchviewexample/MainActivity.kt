@@ -65,8 +65,10 @@ class MainActivity : AppCompatActivity() {
                 Log.v("BUTTON1","BUTTON2")
             }
 
-            override fun button2() {
+            override fun button2() {}
 
+            override fun onClickItemSelection(itemsModel: ItemsModel) {
+                Log.v("ONCLICKCATEGORY", ">>>>222 ${itemsModel.tittle}")
             }
         })
     }

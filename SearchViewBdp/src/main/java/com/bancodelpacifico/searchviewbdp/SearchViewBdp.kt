@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.View.OnFocusChangeListener
@@ -67,7 +68,7 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
     private val mFragmentManager: FragmentManager? = null
     private val mExpandedContentFragment: Fragment? = null
     private var mSupportFragmentManager: FragmentManager? = null
-    private var mExpandedContentCurrentViewSearch : ViewSearchCategory? = ViewSearchCategory()
+    private var mExpandedContentCurrentViewSearch : ViewSearchCategory = ViewSearchCategory(this)
     private val mExpandetContentFragmentNoMatch : ViewSearchNotMatch = ViewSearchNotMatch()
     private var searchEngine:SearchEngine = SearchEngine()
 
@@ -423,5 +424,9 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
 
     override fun button2() {
         onListenerButton.button1()
+    }
+
+    override fun onClickItemSelection(itemsModel: ItemsModel) {
+        onListenerButton.onClickItemSelection(itemsModel)
     }
 }

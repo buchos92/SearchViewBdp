@@ -10,8 +10,9 @@ import com.bancodelpacifico.searchviewbdp.SearchViewBdp
 import com.bancodelpacifico.searchviewbdp.adapter.holder.ListHolderCategory
 import com.bancodelpacifico.searchviewbdp.adapter.holder.ListHolderItems
 import com.bancodelpacifico.searchviewbdp.interfaces.ItemsModel
+import com.bancodelpacifico.searchviewbdp.interfaces.OnListenerButton
 
-class AdpaterMultipleCategory(var items : MutableList<ItemsModel>? = mutableListOf()) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AdpaterMultipleCategory(private var items : MutableList<ItemsModel>? = mutableListOf(),var onListenerButton: OnListenerButton) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val CATEGORY = 0
     private val ITEM = 1
@@ -19,13 +20,11 @@ class AdpaterMultipleCategory(var items : MutableList<ItemsModel>? = mutableList
     override fun getItemCount(): Int {
         return items?.size!!
     }
-    /* Method Custom* */
     fun addNewItems(itemsList: MutableList<out ItemsModel>) {
         items?.clear()
         items?.addAll(itemsList)
         notifyDataSetChanged()
     }
-    /* Method Custom* */
     fun adItems(itemsList: MutableList<out ItemsModel>) {
         items?.addAll(itemsList)
         notifyDataSetChanged()
@@ -67,7 +66,8 @@ class AdpaterMultipleCategory(var items : MutableList<ItemsModel>? = mutableList
         } else { // for email layout
             view = parent.inflate(R.layout.search_content_list_item_item, false)
             ListHolderItems(
-                view
+                view,
+                onListenerButton
             )
         }
     }
