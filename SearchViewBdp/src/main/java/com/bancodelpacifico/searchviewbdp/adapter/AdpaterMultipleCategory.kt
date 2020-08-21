@@ -25,6 +25,11 @@ class AdpaterMultipleCategory(var items : MutableList<ItemsModel>? = mutableList
         items?.addAll(itemsList)
         notifyDataSetChanged()
     }
+    /* Method Custom* */
+    fun adItems(itemsList: MutableList<out ItemsModel>) {
+        items?.addAll(itemsList)
+        notifyDataSetChanged()
+    }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         items?.size ?: return

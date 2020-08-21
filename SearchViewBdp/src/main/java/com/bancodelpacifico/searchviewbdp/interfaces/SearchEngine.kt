@@ -2,17 +2,19 @@ package com.bancodelpacifico.searchviewbdp.interfaces
 
 import com.bancodelpacifico.searchviewbdp.SearchViewBdp.Companion.CATEGORY
 import com.bancodelpacifico.searchviewbdp.SearchViewBdp.Companion.ITEM
-import kotlin.collections.ArrayList
 
 class SearchEngine {
-    var items : List<ItemsModel>? = null
+    private var items : MutableList<ItemsModel>? = mutableListOf()
 
     fun setItemsModel(value: MutableList<ItemsModel>?){
         val itemsModel = value ?: throw IllegalArgumentException("Items Mode required")
-        items = itemsModel
+        putItems(itemsModel)
 
         if(isDuplicateCategory())
             throw IllegalArgumentException("Categories are repeated")
+    }
+    private fun putItems(value: MutableList<ItemsModel>){
+        items?.addAll(value)
     }
     fun searchItem(inputPhrases : CharSequence):MutableList<ItemsModel>{
         val resultSearch:MutableList<ItemsModel> = mutableListOf()
@@ -44,7 +46,7 @@ class SearchEngine {
         return resultSearch.toMutableList()
     }
 
-    fun isDuplicateCategory():Boolean{
+    private fun isDuplicateCategory():Boolean{
         val categories = filterFor(items!!, CATEGORY)
         val listIdCategories = getCategoryId(categories)
 

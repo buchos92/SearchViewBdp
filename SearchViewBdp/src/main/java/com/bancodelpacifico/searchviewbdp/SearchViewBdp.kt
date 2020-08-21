@@ -405,7 +405,11 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
         mSearchBoxListener = listener
     }
 
-    fun setListToSearch(listSearchable:MutableList<ItemsModel>){
+    fun addListToSearch(listSearchable:MutableList<ItemsModel>){
+        searchEngine.setItemsModel(listSearchable)
+        this.listSearchable.addAll(listSearchable)
+    }
+    fun putListToSearch(listSearchable:MutableList<ItemsModel>){
         searchEngine.setItemsModel(listSearchable)
         this.listSearchable.addAll(listSearchable)
     }

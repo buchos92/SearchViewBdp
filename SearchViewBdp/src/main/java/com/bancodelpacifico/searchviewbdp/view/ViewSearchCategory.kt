@@ -42,5 +42,10 @@ class ViewSearchCategory : Fragment() {
             addNewItems(items)
         }
     }
+    fun addItems(items: MutableList<ItemsModel>){
+        adpaterMultipleCategory.apply {
+            addNewItems(items)
+        }
+    }
 }
 
