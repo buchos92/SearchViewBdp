@@ -119,8 +119,7 @@ class Utils {
             }
             anim.duration = duration.toLong()
             anim.start()
-            view.animate().alpha((if (expanding) 1 else 0.toFloat()) as Float)
-                .setDuration(duration / 2.toLong()).start()
+            view.animate().alpha(if (expanding) 1F else 0F).setDuration((duration / 2).toLong()).start()
         }
         /*
         *   paddingInDp : all

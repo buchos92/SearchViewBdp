@@ -224,6 +224,7 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
     private fun expand(requestFocus: Boolean) {
         mCollapsedHeight = height
         mBackgroundTransition?.startTransition(ANIMATION_DURATION)
+        toggleToolbar(true)
         mIsExpanded = true
         animateStates(true, 1f, 0f)
         Utils.crossFadeViews(mExpanded, mCollapsed, ANIMATION_DURATION)
@@ -235,14 +236,11 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
         mBackgroundTransition?.reverseTransition(
             ANIMATION_DURATION
         )
+        toggleToolbar(false)
         mSearchEditText.text = null
         mIsExpanded = false
         animateStates(false, 0f, 1f)
-        Utils.crossFadeViews(
-            mCollapsed,
-            mExpanded,
-            ANIMATION_DURATION
-        )
+        Utils.crossFadeViews(mCollapsed, mExpanded, ANIMATION_DURATION)
         hideContentFragment()
     }
     private fun setBackgroundCompat() {
