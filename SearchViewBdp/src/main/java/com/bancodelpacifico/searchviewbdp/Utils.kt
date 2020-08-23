@@ -126,7 +126,6 @@ class Utils {
         *   paddingAlt : left - right
         * */
         fun setPaddingAll(v: View, paddingInDp: Float, paddingAlt:Float? = null) {
-
             v.setPadding(
                 dpToPx(v.context, paddingAlt ?: paddingInDp),
                 dpToPx(v.context, paddingInDp),

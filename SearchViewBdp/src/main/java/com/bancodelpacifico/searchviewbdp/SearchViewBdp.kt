@@ -8,11 +8,9 @@ import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.TransitionDrawable
-import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.View.OnFocusChangeListener
@@ -92,10 +90,10 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
 
     @Override
     override fun onFinishInflate() {
-        mCollapsed = findViewById(R.id.search_box_collapsed);
-        mSearchIcon = findViewById(R.id.search_magnifying_glass);
-        mCollapsedSearchBox = findViewById(R.id.search_box_start_search);
-        mCollapsedHintView = findViewById(R.id.search_box_collapsed_hint);
+        mCollapsed = findViewById(R.id.search_box_collapsed)
+        mSearchIcon = findViewById(R.id.search_magnifying_glass)
+        mCollapsedSearchBox = findViewById(R.id.search_box_start_search)
+        mCollapsedHintView = findViewById(R.id.search_box_collapsed_hint)
 
 
         mExpanded = findViewById(R.id.search_expanded_root)
@@ -315,14 +313,11 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
                 mOnToggleAnimationListener?.onStart(expand)
             }
         })
-        mAnimator!!.addUpdateListener(AnimatorUpdateListener { animation ->
+        mAnimator!!.addUpdateListener { animation ->
             var padding = (PADDINGANIMATION * animation.animatedFraction).toInt()
             if (expand) padding = PADDINGANIMATION.toInt() - padding
-            Utils.setPaddingAll(
-                this,
-                padding.toFloat()
-            )
-        })
+            Utils.setPaddingAll(this, padding.toFloat())
+        }
         mAnimator!!.duration = ANIMATION_DURATION.toLong()
         mAnimator!!.start()
     }
