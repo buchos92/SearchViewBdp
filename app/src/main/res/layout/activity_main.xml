@@ -17,6 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <include layout="@layout/widget_search_bar"/>
+    <include
+        layout="@layout/widget_search_bar"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

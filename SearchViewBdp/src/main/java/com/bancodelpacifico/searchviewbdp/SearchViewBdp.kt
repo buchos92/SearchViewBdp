@@ -8,9 +8,12 @@ import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.TransitionDrawable
+import android.os.Build
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.View.OnFocusChangeListener
@@ -20,6 +23,7 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.TextView.OnEditorActionListener
+import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -31,7 +35,7 @@ import com.bancodelpacifico.searchviewbdp.view.ViewSearchNotMatch
 import com.bancodelpacifico.searchviewbdp.interfaces.*
 
 
-class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(context,attributeSet),OnListenerButton{
+class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(context, attrs),OnListenerButton{
 
     private lateinit var mCollapsed:ViewGroup
     private lateinit var mSearchIcon:View
@@ -79,14 +83,20 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
 
         // config params of animation
         const val PADDINGANIMATION = 4F
+
     }
 
     init {
         mExpandetContentFragmentNoMatch.setSearchListenerOn(this)
+        attrs?.let {
+            val typedArray = context.obtainStyledAttributes(attrs, R.styleable.designSearchView)
+            val text = typedArray.getText(R.styleable.designSearchView_design_searchview)
+
+            Log.v("text",text.toString())
+            typedArray.recycle()
+        }
+        ANIMATION_DURATION = context.resources.getInteger(R.integer.animation_duration)
     }
-    /* constructor(context: Context,attrs: AttributeSet?) : super(context,attrs) {
-         //ANIMATION_DURATION = context.getResources().getInteger(R.integer.animation_duration);
-     }*/
 
     @Override
     override fun onFinishInflate() {
@@ -206,6 +216,9 @@ class SearchViewBdp(context: Context,attributeSet: AttributeSet): FrameLayout(co
         )
         mBackgroundTransition!!.isCrossFadeEnabled = true
         setBackgroundCompat()
+
+        // here is established the form to init the look and feel
+
         Utils.setPaddingAll(this, PADDINGANIMATION,8f)
 
         super.onFinishInflate()
