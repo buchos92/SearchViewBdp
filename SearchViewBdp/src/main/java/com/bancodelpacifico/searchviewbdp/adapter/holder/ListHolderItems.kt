@@ -3,6 +3,7 @@ package com.bancodelpacifico.searchviewbdp.adapter.holder
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bancodelpacifico.searchviewbdp.R
+import com.bancodelpacifico.searchviewbdp.Utils.Companion.toTitleCase
 import com.bancodelpacifico.searchviewbdp.interfaces.ItemsModel
 import com.bancodelpacifico.searchviewbdp.interfaces.OnListenerButton
 import kotlinx.android.synthetic.main.search_content_list_item_item.view.*
@@ -18,7 +19,7 @@ class ListHolderItems(v: View,var onListenerButton:OnListenerButton): RecyclerVi
     fun bindItems(item : ItemsModel?, nItems:Boolean){
         items = item
         view.title.text = item?.tittle
-        view.description.text = item?.description
+        view.description.text = toTitleCase(item?.description!!)
         view.additional.text = item?.additional
 
         // icons

@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/searchbox_background_color">
 
 
@@ -26,7 +26,7 @@
             android:gravity="center"
             android:textColor="#191c1e"
             android:textSize="19sp"
-            android:lineSpacingExtra="2sp"
+            android:lineSpacingExtra="1sp"
             android:text="No existen resultados" />
 
         <TextView
@@ -35,9 +35,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/S"
             android:gravity="center_horizontal"
-            android:textAlignment="center"
             android:textColor="#636d77"
             android:textSize="19sp"
+            android:lineSpacingExtra="0dp"
+            android:lineSpacingMultiplier="0.7"
             android:text="Puedes intentar nuevamente tu búsqueda o también puedes registrar una cuenta o número para enviar dinero." />
 
         <Button
