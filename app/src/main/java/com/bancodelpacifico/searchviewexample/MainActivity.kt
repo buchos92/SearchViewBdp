@@ -3,6 +3,7 @@ package com.bancodelpacifico.searchviewexample
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.bancodelpacifico.searchviewbdp.SearchViewBdp
@@ -39,6 +40,7 @@ class MainActivity : AppCompatActivity() {
         searchViewLayout.setExpandedHint("Buscar...")
         searchViewLayout.addListToSearch(listSearchable)
         searchViewLayout.handleToolbarAnimation(toolbar)
+        searchViewLayout.initAnimationFadeOn(false)
 
         searchViewLayout.putListToSearch(arrayListOf(
             ItemsModel("CATEGORY - 2","Description",type = CATEGORY,categoryId = 1),
@@ -71,5 +73,11 @@ class MainActivity : AppCompatActivity() {
                 Log.v("ONCLICKCATEGORY", ">>>>222 ${itemsModel.tittle}")
             }
         })
+
+        val button = findViewById<Button>(R.id.buttonOn)
+
+        button.setOnClickListener{
+            searchViewLayout.onClickSearchView()
+        }
     }
 }

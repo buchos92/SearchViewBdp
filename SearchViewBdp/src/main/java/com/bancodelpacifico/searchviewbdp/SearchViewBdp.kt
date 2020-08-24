@@ -13,7 +13,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.View.OnFocusChangeListener
@@ -23,7 +22,6 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.TextView.OnEditorActionListener
-import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -75,6 +73,7 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
     private var searchEngine:SearchEngine = SearchEngine()
 
     private lateinit var onListenerButton: OnListenerButton
+    private var initFadeOn = true
 
     companion object{
         // types of items
@@ -172,11 +171,11 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
                 val listResultSearch = searchEngine.searchItem(phrases)
 
                 if(listResultSearch.size > 0 ){
-                    mExpandedContentCurrentViewSearch!!.addNewItems(listResultSearch)
+                    mExpandedContentCurrentViewSearch.addNewItems(listResultSearch)
                     showContextMatchResult()
                 }else{
                     showContentNotMatchResult()
-                    mExpandedContentCurrentViewSearch!!.addNewItems(listSearchable)
+                    mExpandedContentCurrentViewSearch.addNewItems(listSearchable)
                 }
             }
 
@@ -232,6 +231,11 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
                 expand(true)
             }
     }
+    fun onClickSearchView(){
+        if (!mIsExpanded) {
+            expand(true)
+        }
+    }
     private fun expand(requestFocus: Boolean) {
         mCollapsedHeight = height
         mBackgroundTransition?.startTransition(ANIMATION_DURATION)
@@ -251,7 +255,10 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
         mSearchEditText.text = null
         mIsExpanded = false
         animateStates(false, 0f, 1f)
-        Utils.crossFadeViews(mCollapsed, mExpanded, ANIMATION_DURATION)
+        if(initFadeOn)
+            Utils.crossFadeViews(mCollapsed, mExpanded, ANIMATION_DURATION)
+        else
+            Utils.crossFadeViews(mExpanded, mExpanded, ANIMATION_DURATION)
         hideContentFragment()
     }
     private fun setBackgroundCompat() {
@@ -390,6 +397,16 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
         setBackgroundCompat()
         Utils.setPaddingAll(this@SearchViewBdp, PADDINGANIMATION)
     }
+
+    fun initAnimationFadeOn(value:Boolean){
+        this.initFadeOn = value
+        if(!value){
+            mCollapsed.alpha = 0f
+            mCollapsed.visibility = View.INVISIBLE
+        }
+    }
+
+
     fun setCollapsedHint(searchViewHint: String?) {
         if (searchViewHint != null) {
             mCollapsedHintView.hint = searchViewHint
