@@ -31,6 +31,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.bancodelpacifico.searchviewbdp.view.ViewSearchCategory
 import com.bancodelpacifico.searchviewbdp.view.ViewSearchNotMatch
 import com.bancodelpacifico.searchviewbdp.interfaces.*
+import com.bancodelpacifico.searchviewbdp.view.ViewEmpty
 
 
 class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(context, attrs),OnListenerButton{
@@ -70,6 +71,7 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
     private var mSupportFragmentManager: FragmentManager? = null
     private var mExpandedContentCurrentViewSearch : ViewSearchCategory = ViewSearchCategory(this)
     private val mExpandetContentFragmentNoMatch : ViewSearchNotMatch = ViewSearchNotMatch()
+    private val mViewEmpty: ViewEmpty = ViewEmpty()
     private var searchEngine:SearchEngine = SearchEngine()
 
     private lateinit var onListenerButton: OnListenerButton
@@ -173,9 +175,11 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
                 if(listResultSearch.size > 0 ){
                     mExpandedContentCurrentViewSearch.addNewItems(listResultSearch)
                     showContextMatchResult()
-                }else{
+                }else if (mSearchEditText.text.isNotEmpty()){
                     showContentNotMatchResult()
                     mExpandedContentCurrentViewSearch.addNewItems(listSearchable)
+                }else{
+                    clearContent()
                 }
             }
 
@@ -376,6 +380,23 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
             val transaction = mSupportFragmentManager!!.beginTransaction()
             transaction.setCustomAnimations(R.anim.fade_in_anim_set, R.anim.fade_out_anim_set)
             transaction.replace(R.id.search_expanded_content, fragment!!)
+            transaction.commit()
+        }
+    }
+    private fun clearContent(){
+        // replace fragment content
+        if (mFragmentManager != null) {
+            val transaction: FragmentTransaction = mFragmentManager.beginTransaction()
+            transaction.setCustomAnimations(
+                R.animator.fade_in_object_animator,
+                R.animator.fade_out_object_animator
+            )
+            transaction.replace(R.id.search_expanded_content,mViewEmpty)
+            transaction.commit()
+        } else if (mSupportFragmentManager != null) {
+            val transaction = mSupportFragmentManager!!.beginTransaction()
+            transaction.setCustomAnimations(R.anim.fade_in_anim_set, R.anim.fade_out_anim_set)
+            transaction.replace(R.id.search_expanded_content, mViewEmpty)
             transaction.commit()
         }
     }
