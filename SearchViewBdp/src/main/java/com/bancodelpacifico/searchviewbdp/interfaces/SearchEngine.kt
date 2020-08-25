@@ -2,6 +2,7 @@ package com.bancodelpacifico.searchviewbdp.interfaces
 
 import com.bancodelpacifico.searchviewbdp.SearchViewBdp.Companion.CATEGORY
 import com.bancodelpacifico.searchviewbdp.SearchViewBdp.Companion.ITEM
+import com.bancodelpacifico.searchviewbdp.SearchViewBdp.Companion.ITEM_SECOND_OPTION
 
 class SearchEngine {
     private var items : MutableList<ItemsModel>? = mutableListOf()
@@ -22,11 +23,14 @@ class SearchEngine {
 
         val phrases = inputPhrases.toString().toLowerCase()
 
-        val listCategory = filterFor(items!!,CATEGORY)
-        val listItems = filterFor(items!!, ITEM)
+        val listCategory = filterFor(items!!,CATEGORY, null)
+        val listItems = filterFor(items!!, ITEM,ITEM_SECOND_OPTION)
 
         val searchItemsMatch = listItems.filter {
-            it.tittle.toLowerCase().contains(phrases) || it.description?.toLowerCase()?.contains(phrases)!! || it.additional?.toLowerCase()?.contains(phrases)!!
+                it.tittle.toLowerCase().contains(phrases) ||
+                        it.description?.toLowerCase()?.contains(phrases)!!
+                        || it.additional1?.toLowerCase()?.contains(phrases)!!
+                        || it.additional2?.toLowerCase()?.contains(phrases)!!
         }
         listCategory.forEach{ item ->
             searchItemsMatch.filter { it.categoryId ==  item.categoryId}
@@ -47,12 +51,12 @@ class SearchEngine {
     }
 
     private fun isDuplicateCategory():Boolean{
-        val categories = filterFor(items!!, CATEGORY)
+        val categories = filterFor(items!!, CATEGORY,null)
         val listIdCategories = getCategoryId(categories)
 
         return hasDuplicates(listIdCategories)
     }
-    val filterFor: (List<ItemsModel> ,Int) -> List<ItemsModel>  = { item:List<ItemsModel> ,type:Int ->  item.filter { it.type == type }}
+    val filterFor: (List<ItemsModel> ,Int, Int?) -> List<ItemsModel>  = { item:List<ItemsModel> ,type1:Int,type2:Int? ->  item.filter { it.type == type1 || it.type == type2 }}
 
     fun getCategoryId(items: List<ItemsModel>):Array<Int>{
         val listId : MutableList<Int> = mutableListOf()

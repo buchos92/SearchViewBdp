@@ -81,7 +81,8 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
         // types of items
         const val CATEGORY:Int = 0
         const val ITEM:Int = 1
-        const val NONECATEGORY:Int = 2
+        const val ITEM_SECOND_OPTION:Int = 2
+        const val EMPTY :Int = 21
 
         // config params of animation
         const val PADDINGANIMATION = 4F

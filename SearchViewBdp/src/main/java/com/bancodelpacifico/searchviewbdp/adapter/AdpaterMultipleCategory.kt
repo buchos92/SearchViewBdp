@@ -1,42 +1,45 @@
 package com.bancodelpacifico.searchviewbdp.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import com.bancodelpacifico.searchviewbdp.R
-import com.bancodelpacifico.searchviewbdp.SearchViewBdp
+import com.bancodelpacifico.searchviewbdp.SearchViewBdp.Companion.CATEGORY
+import com.bancodelpacifico.searchviewbdp.SearchViewBdp.Companion.ITEM
+import com.bancodelpacifico.searchviewbdp.SearchViewBdp.Companion.ITEM_SECOND_OPTION
 import com.bancodelpacifico.searchviewbdp.adapter.holder.ListHolderCategory
 import com.bancodelpacifico.searchviewbdp.adapter.holder.ListHolderItems
+import com.bancodelpacifico.searchviewbdp.adapter.holder.ListHolderItemsSecondOption
 import com.bancodelpacifico.searchviewbdp.interfaces.ItemsModel
 import com.bancodelpacifico.searchviewbdp.interfaces.OnListenerButton
 
 class AdpaterMultipleCategory(private var items : MutableList<ItemsModel>? = mutableListOf(),
                               private var onListenerButton: OnListenerButton) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private val CATEGORY = 0
-    private val ITEM = 1
-
     override fun getItemCount(): Int {
         return items?.size!!
     }
+
     fun addNewItems(itemsList: MutableList<out ItemsModel>) {
         items?.clear()
         items?.addAll(itemsList)
         notifyDataSetChanged()
     }
+
     fun adItems(itemsList: MutableList<out ItemsModel>) {
         items?.addAll(itemsList)
         notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        items?.size ?: return
         val item = items?.get(position)
         when {
             item?.type == CATEGORY && item.isShow!! -> (holder as ListHolderCategory).bindItems(item)
             item?.type == ITEM -> (holder as ListHolderItems).bindItems(item,theLastItemIsCategory(items!!, position))
+            item?.type == ITEM_SECOND_OPTION -> (holder as ListHolderItemsSecondOption).bindItems(item,theLastItemIsCategory(items!!, position))
             else -> (holder as EmptyHolder)
         }
     }
@@ -47,18 +50,16 @@ class AdpaterMultipleCategory(private var items : MutableList<ItemsModel>? = mut
         }
         return false
     }
+
     private fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = false): View {
         return LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
     }
-    override fun getItemViewType(position: Int): Int {
-        items?.size ?: return 0
-        if(!items?.get(position)?.isShow!!)return 20
 
-        return if (items!![position].type == CATEGORY)
-            SearchViewBdp.CATEGORY
-        else
-            SearchViewBdp.ITEM
+    override fun getItemViewType(position: Int): Int {
+        //items?.size ?: return 0
+        return items!![position].type
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view: View
         return when(viewType){
@@ -70,12 +71,15 @@ class AdpaterMultipleCategory(private var items : MutableList<ItemsModel>? = mut
                 view = parent.inflate(R.layout.search_content_list_item_item, false)
                 ListHolderItems(view, onListenerButton)
             }
+            ITEM_SECOND_OPTION -> {// for call layout
+                view = parent.inflate(R.layout.search_content_list_item_second ,false)
+                ListHolderItemsSecondOption(view, onListenerButton)
+            }
             else -> {
                 view = parent.inflate(R.layout.search_content_list_item_empty, false)
                 EmptyHolder(view)
             }
         }
-
     }
 }
 

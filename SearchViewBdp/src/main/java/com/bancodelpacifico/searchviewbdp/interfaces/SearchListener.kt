@@ -15,7 +15,8 @@ interface OnToggleAnimationListener {
 @Parcelize
 class ItemsModel( var tittle: String,
                   var description: String? = "",
-                  var additional: String? = "",
+                  var additional1: String? = "",
+                  var additional2: String? = "",
                   var type: Int,
                   var iconItem: Int? = null,
                   var categoryId:Int,

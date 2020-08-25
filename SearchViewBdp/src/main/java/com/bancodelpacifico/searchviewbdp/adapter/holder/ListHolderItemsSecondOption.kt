@@ -2,13 +2,16 @@ package com.bancodelpacifico.searchviewbdp.adapter.holder
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.bancodelpacifico.searchviewbdp.R
-import com.bancodelpacifico.searchviewbdp.Utils.Companion.toTitleCase
+import com.bancodelpacifico.searchviewbdp.Utils
 import com.bancodelpacifico.searchviewbdp.interfaces.ItemsModel
 import com.bancodelpacifico.searchviewbdp.interfaces.OnListenerButton
 import kotlinx.android.synthetic.main.search_content_list_item_item.view.*
+import kotlinx.android.synthetic.main.search_content_list_item_item.view.additional1
+import kotlinx.android.synthetic.main.search_content_list_item_item.view.description
+import kotlinx.android.synthetic.main.search_content_list_item_item.view.title
+import kotlinx.android.synthetic.main.search_content_list_item_second.view.*
 
-class ListHolderItems(v: View, private var onListenerButton:OnListenerButton): RecyclerView.ViewHolder(v), View.OnClickListener {
+class ListHolderItemsSecondOption(v: View, private var onListenerButton: OnListenerButton): RecyclerView.ViewHolder(v), View.OnClickListener {
     private var view: View = v
     private var items: ItemsModel? = null
 
@@ -18,21 +21,18 @@ class ListHolderItems(v: View, private var onListenerButton:OnListenerButton): R
     fun bindItems(item : ItemsModel?, nItems:Boolean){
         items = item
         view.title.text = item?.tittle
-        view.description.text = toTitleCase(item?.description!!)
+        view.description.text = Utils.toTitleCase(item?.description!!)
         view.additional1.text = item.additional1
-
-        // icons
-        val iconItem = item.iconItem ?: R.drawable.ic_baseline_search_24
-        view.iconItem.setImageResource(iconItem)
+        view.additional2.text = item.additional2
 
         if(nItems)
             view.line.visibility = View.INVISIBLE
 
     }
     override fun onClick(p0: View?) {
-       onListenerButton.onClickItemSelection(items!!)
+        onListenerButton.onClickItemSelection(items!!)
     }
-    companion object{
+    companion object {
         private val ITEMS_KEY = "ITEMS_KEY"
     }
 }
