@@ -18,7 +18,8 @@ class ItemsModel( var tittle: String,
                   var additional: String? = "",
                   var type: Int,
                   var iconItem: Int? = null,
-                  var categoryId:Int) : Parcelable
+                  var categoryId:Int,
+                  var isShow:Boolean? = true) : Parcelable
 /***
  * Interface for listening to search edit text.
  */

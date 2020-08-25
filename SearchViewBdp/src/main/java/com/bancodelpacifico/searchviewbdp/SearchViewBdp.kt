@@ -81,6 +81,7 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
         // types of items
         const val CATEGORY:Int = 0
         const val ITEM:Int = 1
+        const val NONECATEGORY:Int = 2
 
         // config params of animation
         const val PADDINGANIMATION = 4F
@@ -172,14 +173,18 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
                 // PROCESS FOR SEARCH
                 val listResultSearch = searchEngine.searchItem(phrases)
 
-                if(listResultSearch.size > 0 ){
-                    mExpandedContentCurrentViewSearch.addNewItems(listResultSearch)
-                    showContextMatchResult()
-                }else if (mSearchEditText.text.isNotEmpty()){
-                    showContentNotMatchResult()
-                    mExpandedContentCurrentViewSearch.addNewItems(listSearchable)
-                }else{
-                    clearContent()
+                when {
+                    listResultSearch.size > 0 -> {
+                        mExpandedContentCurrentViewSearch.addNewItems(listResultSearch)
+                        showContextMatchResult()
+                    }
+                    mSearchEditText.text.isNotEmpty() -> {
+                        showContentNotMatchResult()
+                        mExpandedContentCurrentViewSearch.addNewItems(listSearchable)
+                    }
+                    else -> {
+                        clearContent()
+                    }
                 }
             }
 
@@ -408,7 +413,7 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
         } else if (mSupportFragmentManager != null) {
             val transaction: FragmentTransaction =
                 mSupportFragmentManager!!.beginTransaction()
-            mExpandedContentCurrentViewSearch?.let { transaction.remove(it).commit() }
+            mExpandedContentCurrentViewSearch.let { transaction.remove(it).commit() }
         } else {
             //
         }

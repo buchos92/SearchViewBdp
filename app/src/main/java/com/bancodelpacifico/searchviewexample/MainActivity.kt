@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         // first step is create of object that extend of ListSearchableInterface
         val listSearchable = arrayListOf(
-                ItemsModel("CATEGORY - 1","Description",type = CATEGORY , categoryId = 0),
+                ItemsModel("CATEGORY - 1","Description",type = CATEGORY , categoryId = 0, isShow = false),
                 ItemsModel("Manuel","Marcos","",ITEM , iconItem = R.drawable.ic_baseline_arrow_back_24, categoryId = 0),
                 ItemsModel("Gabriel","Description","",ITEM ,categoryId = 0),
                 ItemsModel("Marcos","Gabriel","",ITEM,categoryId = 0)
@@ -48,12 +48,12 @@ class MainActivity : AppCompatActivity() {
         searchViewLayout.setTransitionDrawables(collapsed,expanded)
         //searchViewLayout.initAnimationFadeOn(false)
 
-        searchViewLayout.putListToSearch(arrayListOf(
-            ItemsModel("CATEGORY - 2","Description",type = CATEGORY,categoryId = 1),
+     /*   searchViewLayout.putListToSearch(arrayListOf(
+            ItemsModel("CATEGORY - 2","Description",type = CATEGORY,categoryId = 1, isShow = false),
             ItemsModel("Gabriel","Manuel","",ITEM,iconItem = R.drawable.ic_baseline_search_24,categoryId = 0),
             ItemsModel("Manuel One","Description","",ITEM,categoryId = 1),
             ItemsModel("Marcos","Gabriel","",ITEM,categoryId = 1)
-        ))
+        ))*/
         searchViewLayout.setSearchListener(object:
             SearchListener {
             override fun onFinished(searchKeyword: String?) {

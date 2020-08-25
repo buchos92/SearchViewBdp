@@ -46,17 +46,5 @@ class ViewSearchCategory(onListenerButton: OnListenerButton) : Fragment() {
             addNewItems(items)
         }
     }
-
-  /*  override fun button1() {
-        TODO("Not yet implemented")
-    }
-
-    override fun button2() {
-        TODO("Not yet implemented")
-    }
-*/
- /*   override fun onClickItemSelection(itemsModel: ItemsModel) {
-        onListenerButton.onClickItemSelection(itemsModel)
-    }*/
 }
 

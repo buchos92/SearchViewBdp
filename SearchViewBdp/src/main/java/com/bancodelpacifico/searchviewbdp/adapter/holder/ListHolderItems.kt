@@ -8,7 +8,7 @@ import com.bancodelpacifico.searchviewbdp.interfaces.ItemsModel
 import com.bancodelpacifico.searchviewbdp.interfaces.OnListenerButton
 import kotlinx.android.synthetic.main.search_content_list_item_item.view.*
 
-class ListHolderItems(v: View,var onListenerButton:OnListenerButton): RecyclerView.ViewHolder(v),
+class ListHolderItems(v: View, private var onListenerButton:OnListenerButton): RecyclerView.ViewHolder(v),
     View.OnClickListener {
     private var view: View = v
     private var items: ItemsModel? = null
@@ -29,7 +29,6 @@ class ListHolderItems(v: View,var onListenerButton:OnListenerButton): RecyclerVi
         if(nItems)
             view.line.visibility = View.INVISIBLE
 
-        //view.content.setOnClickListener { onListenerButton.onClickItemSelection(item!!) }
     }
     override fun onClick(p0: View?) {
        onListenerButton.onClickItemSelection(items!!)
