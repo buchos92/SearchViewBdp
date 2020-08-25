@@ -8,6 +8,7 @@ import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
 import com.bancodelpacifico.searchviewbdp.R
 import com.bancodelpacifico.searchviewbdp.SearchViewBdp.Companion.CATEGORY
+import com.bancodelpacifico.searchviewbdp.SearchViewBdp.Companion.EMPTY
 import com.bancodelpacifico.searchviewbdp.SearchViewBdp.Companion.ITEM
 import com.bancodelpacifico.searchviewbdp.SearchViewBdp.Companion.ITEM_SECOND_OPTION
 import com.bancodelpacifico.searchviewbdp.adapter.holder.ListHolderCategory
@@ -57,6 +58,7 @@ class AdpaterMultipleCategory(private var items : MutableList<ItemsModel>? = mut
 
     override fun getItemViewType(position: Int): Int {
         //items?.size ?: return 0
+        if(!items?.get(position)?.isShow!!) return EMPTY
         return items!![position].type
     }
 
