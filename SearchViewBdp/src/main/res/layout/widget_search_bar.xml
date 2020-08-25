@@ -8,30 +8,26 @@
     android:orientation="horizontal"
     android:clipToPadding="false"
     android:clipChildren="false"
-    android:background="@drawable/border_bottom_gris"
     app:design_searchview="SEARCH_BAR">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/search_box_collapsed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         app:cardCornerRadius="0dp"
         app:cardElevation="0dp"
-        app:cardBackgroundColor="@color/searchbox_background_color">
+        app:cardBackgroundColor="@android:color/transparent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="60dp"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/search_box_left_padding"
-            android:paddingRight="@dimen/search_box_right_padding">
+            android:background="@color/searchbox_background_color">
 
             <ImageView
                 android:id="@+id/search_magnifying_glass"
-                android:layout_width="@dimen/search_box_icon_size"
-                android:layout_height="@dimen/search_box_icon_size"
+                android:layout_width="35dp"
+                android:layout_height="match_parent"
                 android:layout_margin="@dimen/search_box_icon_margin"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:importantForAccessibility="no"
@@ -43,6 +39,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_marginLeft="@dimen/search_box_text_left_margin"
                 android:gravity="center_vertical">
 
                 <TextView
@@ -50,7 +47,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/search_box_text_left_margin"
                     android:textColor="@color/searchbox_text_color"
                     android:textColorHint="@color/searchbox_hint_text_color"
                     android:textSize="@dimen/search_collapsed_text_size" />

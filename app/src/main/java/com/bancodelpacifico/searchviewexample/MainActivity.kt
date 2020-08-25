@@ -36,11 +36,11 @@ class MainActivity : AppCompatActivity() {
         val searchViewLayout: SearchViewBdp = findViewById(R.id.search_view_container)
         searchViewLayout.setExpandedContentSupportFragment(this)
 
-        searchViewLayout.setCollapsedHint("Welcome to Bdp")
-        searchViewLayout.setExpandedHint("Buscar...")
+        searchViewLayout.setCollapsedHint("Buscar")
+        searchViewLayout.setExpandedHint("Buscar")
         searchViewLayout.addListToSearch(listSearchable)
         searchViewLayout.handleToolbarAnimation(toolbar)
-        searchViewLayout.initAnimationFadeOn(false)
+        //searchViewLayout.initAnimationFadeOn(false)
 
         searchViewLayout.putListToSearch(arrayListOf(
             ItemsModel("CATEGORY - 2","Description",type = CATEGORY,categoryId = 1),

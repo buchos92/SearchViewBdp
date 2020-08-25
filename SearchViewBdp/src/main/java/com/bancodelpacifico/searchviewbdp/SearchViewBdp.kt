@@ -247,6 +247,18 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
             mSearchEditText.requestFocus()
         }
     }
+    private fun expandForFirstTime(requestFocus: Boolean) {
+        mCollapsedHeight = height
+        mBackgroundTransition?.startTransition(ANIMATION_DURATION)
+        toggleToolbar(true)
+        mIsExpanded = true
+        animateStates(true, 1f, 0f)
+        Utils.crossFadeViews(mExpanded, mCollapsed, ANIMATION_DURATION)
+        if (requestFocus) {
+            mSearchEditText.requestFocus()
+        }
+
+    }
     private fun collapse() {
         mBackgroundTransition?.reverseTransition(
             ANIMATION_DURATION
@@ -296,7 +308,6 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
         activity: FragmentActivity,
         contentSupportFragment: Fragment? = null
     ) {
-        //mExpandedContentSupportFragment = contentSupportFragment ?: mExpandedContentSupportFragment
         mSupportFragmentManager = activity.supportFragmentManager
         mExpandedHeight = Utils.getSizeOfScreen(activity)!!.y
     }
@@ -312,8 +323,8 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
             override fun onAnimationEnd(animation: Animator) {
                 if (expand) {
                     Utils.setPaddingAll(this@SearchViewBdp, 0F)
-                    showContextMatchResult()
-                    mExpandedContentCurrentViewSearch!!.addNewItems(listSearchable)
+                    //showContextMatchResult()
+                    //mExpandedContentCurrentViewSearch.addNewItems(listSearchable)
                     val params = layoutParams
                     params.height = mExpandedHeight
                     layoutParams = params
