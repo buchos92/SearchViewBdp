@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
                 ItemsModel("CATEGORY - 1","Description",type = CATEGORY , categoryId = 0, isShow = false),
                 ItemsModel("Manuel ITEM OPTION","Marcos","",type = ITEM_SECOND_OPTION  , iconItem = R.drawable.ic_baseline_arrow_back_24, categoryId = 0),
                 ItemsModel("Gabriel","Description","",type = ITEM_SECOND_OPTION ,categoryId = 0),
-                ItemsModel("Marcos","Gabriel","",type = ITEM_SECOND_OPTION,categoryId = 0)
+                ItemsModel("Marcos","Gabriel","",type = ITEM,categoryId = 0)
         )
 
         // set Up searchView bdp
