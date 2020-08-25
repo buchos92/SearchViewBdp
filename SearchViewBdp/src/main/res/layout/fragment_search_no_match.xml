@@ -30,7 +30,7 @@
             android:text="No existen resultados" />
 
         <TextView
-            android:fontFamily="@font/helveticanowtextregular"
+            style="@style/TextNumeroCuenta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/S"

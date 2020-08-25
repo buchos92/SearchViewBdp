@@ -1,11 +1,13 @@
 package com.bancodelpacifico.searchviewexample
 
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import com.bancodelpacifico.searchviewbdp.SearchViewBdp
 import com.bancodelpacifico.searchviewbdp.SearchViewBdp.Companion.CATEGORY
 import com.bancodelpacifico.searchviewbdp.SearchViewBdp.Companion.ITEM
@@ -40,6 +42,10 @@ class MainActivity : AppCompatActivity() {
         searchViewLayout.setExpandedHint("Buscar")
         searchViewLayout.addListToSearch(listSearchable)
         searchViewLayout.handleToolbarAnimation(toolbar)
+
+        val collapsed = ColorDrawable(ContextCompat.getColor(this, android.R.color.transparent))
+        val expanded = ColorDrawable(ContextCompat.getColor(this, R.color.BACKGROUND_COLOR_PRIMARY_DARK))
+        searchViewLayout.setTransitionDrawables(collapsed,expanded)
         //searchViewLayout.initAnimationFadeOn(false)
 
         searchViewLayout.putListToSearch(arrayListOf(

@@ -25,6 +25,7 @@
             android:background="?attr/selectableItemBackgroundBorderless" />
         <EditText
             android:id="@+id/search_expanded_edit_text"
+            android:fontFamily="@font/helveticanowtextregular"
             android:layout_width="0dp"
             android:layout_height="@dimen/search_box_icon_size"
             android:layout_weight="1"
@@ -51,6 +52,5 @@
     <FrameLayout
         android:id="@+id/search_expanded_content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/transparent"/>
+        android:layout_height="match_parent"/>
 </LinearLayout>
