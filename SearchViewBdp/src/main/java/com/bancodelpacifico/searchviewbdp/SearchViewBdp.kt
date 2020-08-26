@@ -228,7 +228,7 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
 
         // here is established the form to init the look and feel
 
-        Utils.setPaddingAll(this, PADDINGANIMATION,8f)
+        //Utils.setPaddingAll(this, PADDINGANIMATION,8f)
 
         super.onFinishInflate()
     }
