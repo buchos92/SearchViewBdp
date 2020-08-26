@@ -19,6 +19,7 @@ class ItemsModel( var tittle: String,
                   var additional2: String? = "",
                   var type: Int,
                   var iconItem: Int? = null,
+                  var idItem : Int? = null,
                   var categoryId:Int,
                   var isShow:Boolean? = true) : Parcelable
 /***
