@@ -8,7 +8,7 @@
         <shape android:shape="rectangle" >
             <stroke
                 android:width="0.8dp"
-                android:color="#fdfdfd" />
+                android:color="#dbe0e4" />
 
             <solid android:color="@color/searchbox_background_color" />
 

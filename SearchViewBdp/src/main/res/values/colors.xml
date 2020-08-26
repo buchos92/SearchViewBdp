@@ -25,4 +25,5 @@
 
     <color name="TEXT_COLOR_LIGHT" category="general">#ffffff</color>
     <color name="TEXT_COLOR_SECONDARY" category="general">#005eb8</color>
+    <color name="expanded_color_icons_and_search">#005eb8</color>
 </resources>
