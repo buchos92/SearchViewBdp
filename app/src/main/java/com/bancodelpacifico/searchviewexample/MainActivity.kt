@@ -12,10 +12,7 @@ import com.bancodelpacifico.searchviewbdp.SearchViewBdp
 import com.bancodelpacifico.searchviewbdp.SearchViewBdp.Companion.CATEGORY
 import com.bancodelpacifico.searchviewbdp.SearchViewBdp.Companion.ITEM
 import com.bancodelpacifico.searchviewbdp.SearchViewBdp.Companion.ITEM_SECOND_OPTION
-import com.bancodelpacifico.searchviewbdp.interfaces.ItemsModel
-import com.bancodelpacifico.searchviewbdp.interfaces.OnListenerButton
-import com.bancodelpacifico.searchviewbdp.interfaces.SearchBoxListener
-import com.bancodelpacifico.searchviewbdp.interfaces.SearchListener
+import com.bancodelpacifico.searchviewbdp.interfaces.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -58,26 +55,29 @@ class MainActivity : AppCompatActivity() {
         searchViewLayout.setSearchListener(object:
             SearchListener {
             override fun onFinished(searchKeyword: String?) {
-
+                Log.v("SearchViewBdp","onFinish")
             }
         })
-        searchViewLayout.setSearchBoxListener(object : SearchBoxListener {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        searchViewLayout.onListenerToggle(object : OnListenerToggle{
+            override fun onCollapsing() {
+                Log.v("SearchViewBdp", "Collapsing")
+            }
+            override fun onExpanding() {
+                Log.v("SearchViewBdp", "Excpanding")
+            }
         })
 
         searchViewLayout.setSearchListenerOn(object : OnListenerButton{
             override fun button1() {
-                Log.v("BUTTON1","BUTTON2")
+                Log.v("SearchViewBdp","button 1")
             }
 
-            override fun button2() {}
+            override fun button2() {
+                Log.v("SearchViewBdp", "button 2")
+            }
 
             override fun onClickItemSelection(itemsModel: ItemsModel) {
-                Log.v("ONCLICKCATEGORY", ">>>>222 ${itemsModel.tittle}")
+                Log.v("SearchViewBdp", "onClick Item")
             }
         })
 

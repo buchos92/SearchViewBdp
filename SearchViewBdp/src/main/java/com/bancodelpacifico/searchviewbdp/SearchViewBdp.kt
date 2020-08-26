@@ -3,12 +3,10 @@ package com.bancodelpacifico.searchviewbdp
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
-import android.animation.ValueAnimator.AnimatorUpdateListener
 import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.TransitionDrawable
-import android.os.Build
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
@@ -76,6 +74,7 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
 
     private lateinit var onListenerButton: OnListenerButton
     private var initFadeOn = true
+    private lateinit var onListenerToggle: OnListenerToggle
 
     companion object{
         // types of items
@@ -247,6 +246,7 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
         }
     }
     private fun expand(requestFocus: Boolean) {
+        onListenerToggle.onExpanding()
         mCollapsedHeight = height
         mBackgroundTransition?.startTransition(ANIMATION_DURATION)
         toggleToolbar(true)
@@ -270,6 +270,7 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
 
     }
     private fun collapse() {
+        onListenerToggle.onCollapsing()
         mBackgroundTransition?.reverseTransition(
             ANIMATION_DURATION
         )
@@ -478,6 +479,9 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
 
     fun setSearchListenerOn(onListenerButton: OnListenerButton){
         this.onListenerButton = onListenerButton
+    }
+    fun onListenerToggle(onListenerToggle: OnListenerToggle){
+        this.onListenerToggle = onListenerToggle
     }
     override fun button1() {
         onListenerButton.button1()
