@@ -8,7 +8,8 @@
     android:orientation="horizontal"
     android:clipToPadding="false"
     android:clipChildren="false"
-    app:design_searchview="SEARCH_BAR">
+    app:design_searchview="SEARCH_BAR"
+    android:background="@drawable/border_bottom_gris">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/search_box_collapsed"
