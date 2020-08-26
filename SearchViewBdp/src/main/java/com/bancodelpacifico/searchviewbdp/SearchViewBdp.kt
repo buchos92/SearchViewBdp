@@ -85,7 +85,7 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
         const val EMPTY :Int = 21
 
         // config params of animation
-        const val PADDINGANIMATION = 4F
+        const val PADDINGANIMATION = 0F
 
     }
 
