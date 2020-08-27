@@ -2,7 +2,6 @@ package com.bancodelpacifico.searchviewexample
 
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.text.Editable
 import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
