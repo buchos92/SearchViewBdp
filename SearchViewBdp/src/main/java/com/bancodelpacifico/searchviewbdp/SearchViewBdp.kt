@@ -69,6 +69,7 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
     private var mSupportFragmentManager: FragmentManager? = null
     private var mExpandedContentCurrentViewSearch : ViewSearchCategory = ViewSearchCategory(this)
     private val mExpandetContentFragmentNoMatch : ViewSearchNotMatch = ViewSearchNotMatch()
+    private lateinit var mFragmentViewContent: FrameLayout
     private val mViewEmpty: ViewEmpty = ViewEmpty()
     private var searchEngine:SearchEngine = SearchEngine()
 
@@ -112,6 +113,9 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
         mSearchEditText = mExpanded.findViewById(R.id.search_expanded_edit_text)
         mBackButtonView = mExpanded.findViewById(R.id.search_expanded_back_button)
         mExpandedSearchIcon = findViewById(R.id.search_expanded_magnifying_glass)
+
+        mFragmentViewContent = findViewById(R.id.search_expanded_content)
+        mFragmentViewContent.setOnClickListener(mOnListenerContent)
 
         mCollapsedSearchBox.setOnLongClickListener {
             mCollapsedSearchBox.performClick()
@@ -493,5 +497,8 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
 
     override fun onClickItemSelection(itemsModel: ItemsModel) {
         onListenerButton.onClickItemSelection(itemsModel)
+    }
+    private val mOnListenerContent = OnClickListener {
+        collapse()
     }
 }
