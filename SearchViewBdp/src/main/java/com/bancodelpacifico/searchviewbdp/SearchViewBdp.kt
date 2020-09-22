@@ -30,6 +30,9 @@ import com.bancodelpacifico.searchviewbdp.view.ViewSearchCategory
 import com.bancodelpacifico.searchviewbdp.view.ViewSearchNotMatch
 import com.bancodelpacifico.searchviewbdp.interfaces.*
 import com.bancodelpacifico.searchviewbdp.view.ViewEmpty
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(context, attrs),OnListenerButton{
@@ -131,15 +134,21 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
             if (hasFocus) {
                 Utils.showInputMethod(v)
             } else {
-                Utils.hideInputMethod(v)
+                GlobalScope.launch(Dispatchers.IO) {
+                    Utils.hideInputMethod(v)
+                    v.clearFocus()
+                }
             }
         }
 
 
         mSearchEditText.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                callSearchListener()
-                Utils.hideInputMethod(v!!)
+                GlobalScope.launch(Dispatchers.IO) {
+                    callSearchListener()
+                    Utils.hideInputMethod(v)
+                    v.clearFocus()
+                }
                 return@OnEditorActionListener true
             }
             false
@@ -211,11 +220,16 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
             }
         })
 
-        mBackButtonView.setOnClickListener { collapse() }
+        mBackButtonView.setOnClickListener {
+            collapse()
+        }
 
         mExpandedSearchIcon.setOnClickListener { v ->
-            callSearchListener()
-            Utils.hideInputMethod(v)
+            GlobalScope.launch {
+                callSearchListener()
+                Utils.hideInputMethod(v)
+                v.clearFocus()
+            }
         }
 
         mCollapsedDrawable = ColorDrawable(ContextCompat.getColor(context, android.R.color.transparent))
