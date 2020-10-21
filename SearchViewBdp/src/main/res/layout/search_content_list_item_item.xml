@@ -45,7 +45,6 @@
             android:layout_marginStart="@dimen/M"
             android:maxLines="1"
             android:text="@string/lorem_ipsum"
-            app:layout_constraintEnd_toEndOf="@+id/description"
             app:layout_constraintStart_toEndOf="@+id/iconItem"
             app:layout_constraintTop_toBottomOf="@+id/description" />
 

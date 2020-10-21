@@ -1,5 +1,6 @@
 package com.bancodelpacifico.searchviewbdp.adapter.holder
 
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bancodelpacifico.searchviewbdp.R
@@ -20,7 +21,6 @@ class ListHolderItems(v: View, private var onListenerButton:OnListenerButton): R
         view.title.text = item?.tittle
         view.description.text = toTitleCase(item?.description!!)
         view.additional1.text = item.additional1
-
         // icons
         val iconItem = item.iconItem ?: R.drawable.ic_baseline_search_24
         view.iconItem.setImageResource(iconItem)

@@ -134,21 +134,17 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
             if (hasFocus) {
                 Utils.showInputMethod(v)
             } else {
-                GlobalScope.launch(Dispatchers.IO) {
-                    Utils.hideInputMethod(v)
-                    v.clearFocus()
-                }
+                Utils.hideInputMethod(v)
+                v.clearFocus()
             }
         }
 
 
         mSearchEditText.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                GlobalScope.launch(Dispatchers.IO) {
                     callSearchListener()
                     Utils.hideInputMethod(v)
                     v.clearFocus()
-                }
                 return@OnEditorActionListener true
             }
             false
@@ -185,7 +181,6 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
 
                 // PROCESS FOR SEARCH
                 val listResultSearch = searchEngine.searchItem(phrases)
-
                 when {
                     listResultSearch.size > 0 -> {
                         mExpandedContentCurrentViewSearch.addNewItems(listResultSearch)
@@ -225,11 +220,9 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
         }
 
         mExpandedSearchIcon.setOnClickListener { v ->
-            GlobalScope.launch {
-                callSearchListener()
-                Utils.hideInputMethod(v)
-                v.clearFocus()
-            }
+            callSearchListener()
+            Utils.hideInputMethod(v)
+            v.clearFocus()
         }
 
         mCollapsedDrawable = ColorDrawable(ContextCompat.getColor(context, android.R.color.transparent))
