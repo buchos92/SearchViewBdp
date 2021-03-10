@@ -51,6 +51,15 @@ class MainActivity : AppCompatActivity() {
             ItemsModel("Manuel One","Description","",type = ITEM,categoryId = 1),
             ItemsModel("Marcos","Gabriel","",type = ITEM_SECOND_OPTION,categoryId = 1)
         ))*/
+
+        searchViewLayout.putListToSearch(arrayListOf(
+            ItemsModel("CATEGORY - 1","Description",type = CATEGORY , categoryId = 0, isShow = false),
+            ItemsModel("Manuel ITEM OPTION","Marcos","Cedula  -  ps0000",type = ITEM  , iconItem = R.drawable.ic_baseline_arrow_back_24, categoryId = 0),
+            ItemsModel("Gabriel","Description","Cedula  -  ps0000",type = ITEM ,categoryId = 0),
+            ItemsModel("Marcos","Gabriel","Cedula  -  ps0000",type = ITEM,categoryId = 0),
+            ItemsModel("Elvis","Salvatierra","Cedula  -  ps0001", type = ITEM, categoryId = 0)
+        ))
+
         searchViewLayout.setSearchListener(object:
             SearchListener {
             override fun onFinished(searchKeyword: String?) {

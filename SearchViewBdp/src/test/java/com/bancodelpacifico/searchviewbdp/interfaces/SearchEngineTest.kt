@@ -56,7 +56,7 @@ class SearchEngineTest {
     @Test
     fun `test for getter the category`() {
         // act
-        var resultFilterFor = searchEngine.filterFor(poolItems, CATEGORY, null)
+        val resultFilterFor = searchEngine.filterFor(poolItems, CATEGORY, null)
 
         //assert
         assertEquals(2, resultFilterFor.size)
@@ -64,7 +64,7 @@ class SearchEngineTest {
     @Test
     fun `test for getter the itemts`() {
         // act
-        var resultFilterFor = searchEngine.filterFor(poolItems, ITEM, ITEM_SECOND_OPTION)
+        val resultFilterFor = searchEngine.filterFor(poolItems, ITEM, ITEM_SECOND_OPTION)
 
         //assert
         assertEquals(6, resultFilterFor.size)

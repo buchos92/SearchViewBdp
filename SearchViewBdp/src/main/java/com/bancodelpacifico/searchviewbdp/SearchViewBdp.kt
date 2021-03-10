@@ -35,20 +35,20 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
-class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(context, attrs),OnListenerButton{
+class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(context, attrs),OnListenerButton {
 
-    private lateinit var mCollapsed:ViewGroup
-    private lateinit var mSearchIcon:View
-    private lateinit var mCollapsedSearchBox:View
-    private lateinit var mCollapsedHintView:TextView
+    private lateinit var mCollapsed: ViewGroup
+    private lateinit var mSearchIcon: View
+    private lateinit var mCollapsedSearchBox: View
+    private lateinit var mCollapsedHintView: TextView
 
-    private lateinit var mExpanded:ViewGroup
-    private lateinit var mSearchEditText:EditText
-    private lateinit var mBackButtonView:View
-    private lateinit var mExpandedSearchIcon:View
+    private lateinit var mExpanded: ViewGroup
+    private lateinit var mSearchEditText: EditText
+    private lateinit var mBackButtonView: View
+    private lateinit var mExpandedSearchIcon: View
 
     private var mToolbar: Toolbar? = null
-    private var listSearchable:ArrayList<ItemsModel > = arrayListOf()
+    private var listSearchable: ArrayList<ItemsModel> = arrayListOf()
 
     private var toolbarExpandedHeight = 0
     private var mExpandedHeight = 0
@@ -57,7 +57,7 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
     private var mBackgroundTransition: TransitionDrawable? = null
 
     private var mIsExpanded = false
-    private var mCollapsedHeight:Int? = null
+    private var mCollapsedHeight: Int? = null
     private var mSearchListener: SearchListener? = null
     private var mSearchBoxListener: SearchBoxListener? = null
 
@@ -70,22 +70,22 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
     private val mFragmentManager: FragmentManager? = null
     private val mExpandedContentFragment: Fragment? = null
     private var mSupportFragmentManager: FragmentManager? = null
-    private var mExpandedContentCurrentViewSearch : ViewSearchCategory = ViewSearchCategory(this)
-    private val mExpandetContentFragmentNoMatch : ViewSearchNotMatch = ViewSearchNotMatch()
+    private var mExpandedContentCurrentViewSearch: ViewSearchCategory = ViewSearchCategory(this)
+    private val mExpandetContentFragmentNoMatch: ViewSearchNotMatch = ViewSearchNotMatch()
     private lateinit var mFragmentViewContent: FrameLayout
     private val mViewEmpty: ViewEmpty = ViewEmpty()
-    private var searchEngine:SearchEngine = SearchEngine()
+    private var searchEngine: SearchEngine = SearchEngine()
 
     private lateinit var onListenerButton: OnListenerButton
     private var initFadeOn = true
     private lateinit var onListenerToggle: OnListenerToggle
 
-    companion object{
+    companion object {
         // types of items
-        const val CATEGORY:Int = 0
-        const val ITEM:Int = 1
-        const val ITEM_SECOND_OPTION:Int = 2
-        const val EMPTY :Int = 21
+        const val CATEGORY: Int = 0
+        const val ITEM: Int = 1
+        const val ITEM_SECOND_OPTION: Int = 2
+        const val EMPTY: Int = 21
 
         // config params of animation
         const val PADDINGANIMATION = 0F
@@ -98,7 +98,7 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
             val typedArray = context.obtainStyledAttributes(attrs, R.styleable.designSearchView)
             val text = typedArray.getText(R.styleable.designSearchView_design_searchview)
 
-            Log.v("text",text.toString())
+            Log.v("text", text.toString())
             typedArray.recycle()
         }
         ANIMATION_DURATION = context.resources.getInteger(R.integer.animation_duration)
@@ -142,9 +142,9 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
 
         mSearchEditText.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    callSearchListener()
-                    Utils.hideInputMethod(v)
-                    v.clearFocus()
+                callSearchListener()
+                Utils.hideInputMethod(v)
+                v.clearFocus()
                 return@OnEditorActionListener true
             }
             false
@@ -225,8 +225,10 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
             v.clearFocus()
         }
 
-        mCollapsedDrawable = ColorDrawable(ContextCompat.getColor(context, android.R.color.transparent))
-        mExpandedDrawable = ColorDrawable(ContextCompat.getColor(context, R.color.default_color_expanded))
+        mCollapsedDrawable =
+            ColorDrawable(ContextCompat.getColor(context, android.R.color.transparent))
+        mExpandedDrawable =
+            ColorDrawable(ContextCompat.getColor(context, R.color.default_color_expanded))
         mBackgroundTransition = TransitionDrawable(
             arrayOf(
                 mCollapsedDrawable,
@@ -247,15 +249,17 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
      * Open the search UI when the user clicks on the search box.
      */
     private val mSearchViewOnClickListener = OnClickListener {
-            if (!mIsExpanded) {
-                expand(true)
-            }
-    }
-    fun onClickSearchView(){
         if (!mIsExpanded) {
             expand(true)
         }
     }
+
+    fun onClickSearchView() {
+        if (!mIsExpanded) {
+            expand(true)
+        }
+    }
+
     private fun expand(requestFocus: Boolean) {
         onListenerToggle.onExpanding()
         mCollapsedHeight = height
@@ -268,6 +272,7 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
             mSearchEditText.requestFocus()
         }
     }
+
     private fun expandForFirstTime(requestFocus: Boolean) {
         mCollapsedHeight = height
         mBackgroundTransition?.startTransition(ANIMATION_DURATION)
@@ -280,6 +285,7 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
         }
 
     }
+
     private fun collapse() {
         onListenerToggle.onCollapsing()
         mBackgroundTransition?.reverseTransition(
@@ -289,15 +295,17 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
         mSearchEditText.text = null
         mIsExpanded = false
         animateStates(false, 0f, 1f)
-        if(initFadeOn)
+        if (initFadeOn)
             Utils.crossFadeViews(mCollapsed, mExpanded, ANIMATION_DURATION)
         else
             Utils.crossFadeViews(mExpanded, mExpanded, ANIMATION_DURATION)
         hideContentFragment()
     }
+
     private fun setBackgroundCompat() {
         background = mBackgroundTransition
     }
+
     private fun callSearchListener() {
         val editable = mSearchEditText.text
         if (editable != null && editable.isNotEmpty()) {
@@ -375,16 +383,17 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
         mAnimator!!.start()
     }
 
-    private fun showContextMatchResult(){
+    private fun showContextMatchResult() {
         // replace fragment content
         replaceFragmentContent(mExpandedContentCurrentViewSearch)
     }
+
     private fun showContentNotMatchResult() {
         // replace fragment content
         replaceFragmentContent(mExpandetContentFragmentNoMatch)
     }
 
-    private fun replaceFragmentContent(fragment: Fragment?){
+    private fun replaceFragmentContent(fragment: Fragment?) {
         // replace fragment content
         if (mFragmentManager != null) {
             val transaction: FragmentTransaction = mFragmentManager.beginTransaction()
@@ -401,7 +410,8 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
             transaction.commit()
         }
     }
-    private fun clearContent(){
+
+    private fun clearContent() {
         // replace fragment content
         if (mFragmentManager != null) {
             val transaction: FragmentTransaction = mFragmentManager.beginTransaction()
@@ -409,7 +419,7 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
                 R.animator.fade_in_object_animator,
                 R.animator.fade_out_object_animator
             )
-            transaction.replace(R.id.search_expanded_content,mViewEmpty)
+            transaction.replace(R.id.search_expanded_content, mViewEmpty)
             transaction.commit()
         } else if (mSupportFragmentManager != null) {
             val transaction = mSupportFragmentManager!!.beginTransaction()
@@ -431,6 +441,7 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
             //
         }
     }
+
     fun setTransitionDrawables(
         collapsedDrawable: Drawable?,
         expandedDrawable: Drawable?
@@ -448,9 +459,9 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
         Utils.setPaddingAll(this@SearchViewBdp, PADDINGANIMATION)
     }
 
-    fun initAnimationFadeOn(value:Boolean){
+    fun initAnimationFadeOn(value: Boolean) {
         this.initFadeOn = value
-        if(!value){
+        if (!value) {
             mCollapsed.alpha = 0f
             mCollapsed.visibility = View.INVISIBLE
         }
@@ -462,6 +473,7 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
             mCollapsedHintView.hint = searchViewHint
         }
     }
+
     fun setExpandedHint(searchViewHint: String?) {
         if (searchViewHint != null) {
             mSearchEditText.hint = searchViewHint
@@ -471,6 +483,7 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
     fun handleToolbarAnimation(toolbar: Toolbar?) {
         mToolbar = toolbar
     }
+
     fun setSearchListener(listener: SearchListener) {
         mSearchListener = listener
     }
@@ -479,21 +492,32 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
         mSearchBoxListener = listener
     }
 
-    fun addListToSearch(listSearchable:MutableList<ItemsModel>){
-        searchEngine.setItemsModel(listSearchable)
-        this.listSearchable.addAll(listSearchable)
-    }
-    fun putListToSearch(listSearchable:MutableList<ItemsModel>){
+    /**
+     * agregar nuevos items con su respectiva categoria
+     */
+    fun addListToSearch(listSearchable: MutableList<ItemsModel>) {
         searchEngine.setItemsModel(listSearchable)
         this.listSearchable.addAll(listSearchable)
     }
 
-    fun setSearchListenerOn(onListenerButton: OnListenerButton){
+    /**
+     * limpia la lista y vuelve a insertar los registros
+     */
+    fun putListToSearch(listSearchable: MutableList<ItemsModel>) {
+        searchEngine.clearItems()
+        searchEngine.setItemsModel(listSearchable)
+        this.listSearchable.clear()
+        this.listSearchable.addAll(listSearchable)
+    }
+
+    fun setSearchListenerOn(onListenerButton: OnListenerButton) {
         this.onListenerButton = onListenerButton
     }
-    fun onListenerToggle(onListenerToggle: OnListenerToggle){
+
+    fun onListenerToggle(onListenerToggle: OnListenerToggle) {
         this.onListenerToggle = onListenerToggle
     }
+
     override fun button1() {
         onListenerButton.button1()
     }
@@ -505,6 +529,7 @@ class SearchViewBdp(context: Context, attrs: AttributeSet?) : FrameLayout(contex
     override fun onClickItemSelection(itemsModel: ItemsModel) {
         onListenerButton.onClickItemSelection(itemsModel)
     }
+
     private val mOnListenerContent = OnClickListener {
         collapse()
     }
